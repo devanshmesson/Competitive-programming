@@ -5,9 +5,9 @@ using namespace std;
 int main()
 {
     ios::sync_with_stdio(0);cin.tie();cout.tie(0);
-    long long int t;
-    cin>>t;
-    while(t--)
+    long long int q;
+    cin>>q;
+    while(q--)
     {
         long long int a,b,sum=0,tp=0,k=0,ans=0;
         cin>>a>>b;
