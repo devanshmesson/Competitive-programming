@@ -1,3 +1,4 @@
+//B. Sorted Adjacent Differences
 #include <bits/stdc++.h>
 using namespace std;
 int main()
