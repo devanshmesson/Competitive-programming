@@ -25,16 +25,16 @@ int main()
         {
             if(coin[i]>j)
              {
-                 if(i-1<0){dp[i][j]=0;dp[i][j]=dp[i][j]%mod;}
-                 else {dp[i][j]=dp[i-1][j];dp[i][j]=dp[i][j]%mod;}
+                 if(i-1<0){dp[i][j]=0;}
+                 else {dp[i][j]=dp[i-1][j];}
              }
             else
             {
-                if(i-1<0){dp[i][j]=dp[i][j-coin[i]];dp[i][j]=dp[i][j]%mod;}
-                else {dp[i][j]=dp[i][j-coin[i]]+dp[i-1][j];dp[i][j]=dp[i][j]%mod;}
+                if(i-1<0){dp[i][j]=dp[i][j-coin[i]];}
+                else {dp[i][j]=dp[i][j-coin[i]]+dp[i-1][j];}
             }
             dp[i][j]=dp[i][j]%mod;
         }
     }
-    cout<<dp[m-1][n]%mod;
+    cout<<dp[m-1][n];
 }
