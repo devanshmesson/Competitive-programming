@@ -1,16 +1,6 @@
-#include<iostream>
-#include<queue>
-#include<set>
-#include<vector>
-#include<map>
-#include <algorithm>
 #include<bits/stdc++.h>
 using namespace std;
-#ifndef ONLINE_JUDGE
-#define freopen freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-#else
-#define freopen //comment
-#endif
+
 #define io ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 #define int long long int
 
