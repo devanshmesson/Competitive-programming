@@ -1,23 +1,12 @@
-#include<iostream>
-#include<queue>
-#include<set>
-#include<vector>
-#include<map>
-#include <algorithm>
-//#include<bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-#ifndef ONLINE_JUDGE
-#define freopen freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-#else
-#define freopen //comment
-#endif
+
 #define io ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 #define int long long int
 
 int32_t main()
 {
 	io
-	//freopen
 	string s;
 	cin>>s;
 	map<char,int>mp;
@@ -34,8 +23,8 @@ int32_t main()
 		if(mp[*i]%2==0)even++;
 		else odd++;
 	}
-    vector<char>v;
-    vector<char>rev;
+       vector<char>v;
+       vector<char>rev;
 	if(odd>1)cout<<"NO SOLUTION"<<endl;
 	else 
 	{
@@ -59,7 +48,7 @@ int32_t main()
 		  {
 		  	for(int j=0;j<mp[*i];j++)
 		  	{
-              v.push_back(*i);
+                          v.push_back(*i);
 		  	}
 
 		  }
