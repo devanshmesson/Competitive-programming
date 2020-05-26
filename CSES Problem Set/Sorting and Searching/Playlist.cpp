@@ -1,6 +1,6 @@
 /*
 Question - Longest substring with unique characters
-Solved - O(n) Time Complexity
+Solved - O(n) Time-Complexity
 Approach-Stored index of the last occurrence of every element and 
          Whenever there comes a repeted number then the starting index of 
          next window is changed to lastindex[repeted num]+1
