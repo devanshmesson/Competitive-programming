@@ -1,6 +1,6 @@
 /*
 Question - longest substring after adding each element between 0 and given number.This element is a barrier in the segment [0,given number]
-Solved - O(nLogn) Time Complexity
+Solved - O(nLogn) Time-Complexity
 Approach-Focus is on the segment which will be affected after adding an element.That Segment will be found by calculating 
          upper bound and lower bound on the set which is containing the previously input numbers.Multiset is used to 
          contain all possible paths and deleting the segment which will be affected by adding the input.
