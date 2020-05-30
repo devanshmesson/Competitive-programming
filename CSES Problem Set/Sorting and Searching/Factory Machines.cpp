@@ -31,7 +31,4 @@ main()
   }
 
   cout<<high<<endl;                  //high will be answer
-  
-
-
-}
+  }
