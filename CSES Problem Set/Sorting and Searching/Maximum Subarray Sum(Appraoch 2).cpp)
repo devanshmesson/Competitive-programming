@@ -1,0 +1,33 @@
+/*Problem- Given an array find subarray which has maximum sum
+  Time Complexity-O(n)
+  Approach-Made a prefix sum array
+          -Answer will be pref[R]-pref[Low-1]
+          -To maximise answer we will minimise pref[Low-1]
+#include<bits/stdc++.h>
+using namespace std;
+#define int long long int
+main() 
+{
+  int n;
+  cin>>n;
+  int a[n+1];
+  for(int i=0;i<n;i++)cin>>a[i];
+  int pref[n+1]={0};
+  
+  for(int i=0;i<n;i++)
+  {
+    pref[i]=a[i]+(i==0?0:pref[i-1]);
+  }
+  int ans=INT_MIN,min_so_far=0;
+  for(int i=0;i<n;i++)
+  {
+    ans=max(ans,pref[i]-min_so_far);
+    min_so_far=min(min_so_far,pref[i]);
+  }
+  cout<<ans<<endl;
+}
+
+  
+
+
+  
