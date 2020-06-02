@@ -5,6 +5,7 @@
           -High will be all elements of array(by traversal)
           -To Calculate Low where condition satisfies => pref[low]=pref[High]-x
           -Put prefix sum values till the "High"th index in a hash table(unordered map) and check if(pref[High]-x) is there in hash table or not.
+*/
 include<bits/stdc++.h>
 using namespace std;
 main() 
