@@ -9,7 +9,31 @@ For Ex- number - 729 number of digits(n)=3
       -binary equivalent of 9-1001
       Concatenate them all-111101001
       Remove last n digits from this binary number
-      -Result-111101    
+      -Result-111101 (1+4+8+16+32=61)
+      This Result should be maximized. This is the Problem.
+     
+Time Complexity-O(n)
+
+Approach-To maximize the Result,We will choose greatest number of n digits and try to minimize it.
+        -for ex-n=3
+        -take number-999
+        -binary equivalent-100110011001
+        Result-100110011 (Removed last 3 digits)
+        if we remove last 3 digits from this binary number then there is no use of the '1' at the 0th place.So instead of '1' we can change it to '0',
+        and by doing so , our last number will become 8 instead of 9
+        
+        binaryequivalent of 998-100110011000
+        Result-100110011 (Removed last 3 digits)
+        As You see final result of 998 and 999 is same , so we  will choose 998 as we are asked to give minimal answer.
+        Now you can see that we minimized our answer without changing the binary equivalant.
+        
+        if we take 997 
+        binary equivalent-10011001111
+        Result-10011001 (Removed last 3 digits)
+        
+        if se see Result of  997 is not maximum.so 998 is the minimal answer we get.
+        
+       
 */
 #include<bits/stdc++.h>
 using namespace std;
