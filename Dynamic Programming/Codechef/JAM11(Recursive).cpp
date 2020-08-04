@@ -1,3 +1,4 @@
+//Same Explaination as in iterative approach
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long int
@@ -22,5 +23,6 @@ main()
     *(dp+1)=1;
     *(dp+2)=2; 
    cout<<sol(n)<<endl;
-  }   
+  }
+  delete[] dp;
 }
