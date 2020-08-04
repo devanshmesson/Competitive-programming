@@ -16,25 +16,23 @@ Approach-What will be the previous step before we reach nth stair?
 */
 #include<bits/stdc++.h>
 using namespace std;
+#define int long long int
 main()
 {
-  freopen
-  io
-  int t,mod=1000000007;
+  int t,mod=1000000007,n;
   cin>>t;
+  int dp[100001];
+  dp[0]=1;
+  dp[1]=1;
+  dp[2]=2;
+  
+  for(int i=3;i<=100000;i++)
+  {
+    dp[i]=(dp[i-1]+dp[i-2]+dp[i-3])%mod;
+  }
   while(t--)
   {
-    int n;
     cin>>n;
-    int dp[100001];
-    dp[0]=1;
-    dp[1]=1;
-    dp[2]=2;
-
-    for(int i=3;i<=n;i++)
-    {
-      dp[i]=(dp[i-1]+dp[i-2]+dp[i-3])%mod;
-    }
     cout<<dp[n]<<endl;
   }
 }
