@@ -1,31 +1,38 @@
-#include <iostream>
- 
+/*
+Problem-Given a sum "n", You have a dice containing moves 1 to 6.In How many ways you can achieve sum "n" by playing with it any number of times.
+Time Complexity-O(n)
+Approach-Focus on the last move through we can achieve the required sum.
+        -Last move would be 1,2,3,4,5,6.
+        -If we know number of ways to achive sum n-1,n-2,n-3,n-4,n-5,n-6 then we are done with the problem.Wanna know How?
+        Let's Assume:
+        A-No. of ways to achieve sum n-1 (if last move is 6 )
+        B-No. of ways to achieve sum n-2 (if last move is 5 )
+        C-No. of ways to achieve sum n-3 (if last move is 4 )
+        D-No. of ways to achieve sum n-4 (if last move is 3 )
+        E-No. of ways to achieve sum n-5 (if last move is 2 )
+        F-No. of ways to achieve sum n-6 (if last move is 1 )
+        X[i]-[where "i" can be (A-F)],No. of ways to throw 1,2,3,4,5,6 (which is 1)
+        
+       Final Answer=(A*X)+(B*X)+(C*X)+(D*X)+(E*X)+(F*X)
+*/
+#include<bits/stdc++.h>
 using namespace std;
-//int N=100000;
-int main()
+#define int long long int
+main()
 {
-    ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
-    #define int long long int
-    int n;
-    cin>>n;
-    int d[n+100];
-    d[0]=1;
-    d[1]=1;
-    d[2]=2;
-    d[3]=4;
-    d[4]=8;
-    d[5]=16;
-    if(n==1){cout<<1<<endl;return 0;}
-    else if(n==2){cout<<2<<endl;return 0;}
- 
-    for(int i=6;i<=n;i++)
-    {
-        d[i]=d[i-1]%1000000007+d[i-2]%1000000007+d[i-3]%1000000007+d[i-4]%1000000007+d[i-5]%1000000007+d[i-6]%1000000007;
-    }
- 
- 
-    cout<<d[n]%(1000000007)<<endl;
- 
- 
-    return 0;
+  int n,sum=1,mod=1e9+7;
+  cin>>n;
+  int dp[1000001]={0};
+  dp[1]=1;
+  for(int i=2;i<=6;i++)  //Calculating Values till dp[6]
+  {
+    dp[i]=sum+1;
+    sum+=dp[i];
+  }
+  if(n<=6){cout<<dp[n]<<endl;return 0;}
+  for(int i=7;i<=n;i++)   
+  {
+    dp[i]=(dp[i-1]+dp[i-2]+dp[i-3]+dp[i-4]+dp[i-5]+dp[i-6])%mod;
+  }
+  cout<<dp[n]<<endl;
 }
