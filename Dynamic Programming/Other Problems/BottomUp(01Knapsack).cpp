@@ -1,38 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
-main()
-{ 
- int n,cap;
- cin>>n;
- int wt[n+1],val[n+1];
- for(int i=0;i<n;i++)cin>>wt[i];
- for(int i=0;i<n;i++)cin>>val[i];
- cin>>cap;
- 
- int profit[n+1][cap+1]; //2-D Matrix for Bottom Up Approach.We take changing variables int rows and columns of 2D matrix
+int main()
+{
+  int n;
+  cin>>n;
+  int weight[n+1],val[n+1],capacity;
+  for(int i=1;i<=n;i++)cin>>weight[i];
+  for(int i=1;i<=n;i++)cin>>val[i];
+  cin>>capacity;
+  int dp[capacity+1][n+1];
+  
+  //Base Case of Recursive Function=Initialization in Matrix
 
- //Initialization
- //for n=0 profit=0
- for(int i=0;i<=n;i++)profit[i][0]=0;
-   
- //For w=0 profit=0
- for(int i=0;i<=cap;i++)profit[0][i]=0;
- 
- //Starting for n=1 and w=1
- for(int i=1;i<=n;i++)
- {
-  for(int j=1;j<=cap;j++)
+  //Base Case1 if n==0 then profit=0
+  for(int i=0;i<=capacity;i++)dp[i][0]=0;
+  //Base Case2 if capacity==0 then profit=0
+  for(int i=0;i<=n;i++)dp[0][i]=0;
+
+  //Code the Choice Diagram for every subproblem
+
+  for(int i=1;i<=capacity;i++)
   {
-    if(wt[i-1]<=j)
+    for(int j=1;j<=n;j++)
     {
-      profit[i][j]=max(val[i-1]+profit[i-1][j-wt[i-1]],  //include the item
-                 profit[i-1][j]);                  //don't include the item
-    }
-    else if(wt[i-1]>j)
-    {
-      profit[i][j]=profit[i-1][j]; //dont include the item
+       if(weight[j-1]<=i)  //Can include the item
+       {
+         dp[i][j]=max(val[j-1]+dp[i-weight[j-1]][j-1],dp[i][j-1]); //first-include , second-not include
+       }
+       else //Cannot include the item
+       {
+        dp[i][j]=dp[i][j-1]; // Never include the item
+       }
     }
   }
- }
- cout<<profit[n][cap]<<endl;
+  cout<<dp[capacity][n]<<endl; //last cell of the matrix is the answer
+  return 0;
 }
