@@ -1,44 +1,43 @@
 /*
-1)Think Recursively
-2)Think base cases
-3)Make Choice Diagram
-4)Code 2 and 3
-5)Memoize it just add 4 lines to make it a Dp.
+Memoize the recursive solution.
+Make a 2D matrix with Dimensions as the variables which change during recursion(in this case n and capacity).
+Save the result of recursive function as dp[capacity][n] OR *(dp+capacity+n)
+If dp[capacity][n] is not -1 then return that value and here you save calculation through DP
 */
-
 #include<bits/stdc++.h>
 using namespace std;
 
-int dp[101][1001]; //suppossed constraints to be this
-int knapsack(int *wt,int *val,int n,int cap)
+int knap(int weight[],int val[],int capacity,int n,int * dp) //Recieve 2D matrix in function as integer pointer
 {
-  //Base Condition - smallest valid input
-  if(n==0 || cap==0)return 0;
+  //if already computed
+  if(*(dp+capacity+n)!=-1)return *(dp+capacity+n); //Access 2D Matix cell through integer pointer as *(arrayname+row+column)
+  
+  /*Dimensions of matrix will be the variables which change during recursion*/
+  
+  //base condition
+  if(n==0 || capacity==0)return 0; //zero number of items OR zero capacity
 
-  if(dp[n][cap]!=-1)return dp[n][cap]; //Dynamic Programing taking place
-
-  //Code Choice Diagram
-  if(wt[n-1]<=cap)
-  {
-    return dp[n][cap]=max((val[n-1]+knapsack(wt,val,n-1,cap-wt[n-1])),  //include item
-              (knapsack(wt,val,n-1,cap)));                              //dont inlclude item
+  //code the choice diagram
+  if(weight[n]<=capacity) // can be included in knapsack
+  { 
+    return *(dp+capacity+n)=max(val[n]+knap(weight,val,capacity-weight[n],n-1,(int*)dp) ,//include the item
+               knap(weight,val,capacity,n-1,(int*)dp));//dont include the item
   }
-  else
+  else //cannot be included in the knapsack
   {
-    return dp[n][cap]=knapsack(wt,val,n-1,cap);   //never include that item
+    return *(dp+capacity+n)=knap(weight,val,capacity,n-1,(int*)dp); //never include
   }
 }
-
-
-main()
-{ 
- int n,cap;
- cin>>n;
- int wt[n+1],val[n+1];
- for(int i=0;i<n;i++)cin>>wt[i];
- for(int i=0;i<n;i++)cin>>val[i]; 
- cin>>cap;
- memset(dp,-1,sizeof(dp));
- int maxprofit=knapsack(wt,val,n,cap);
- cout<<maxprofit<<endl;
+int main()
+{
+  int n;
+  cin>>n;
+  int weight[n+1],val[n+1],capacity;
+  for(int i=1;i<=n;i++)cin>>weight[i];
+  for(int i=1;i<=n;i++)cin>>val[i];
+  cin>>capacity;
+  int dp[capacity+1][n+1];
+  memset(dp,-1,sizeof(dp));
+  cout<<knap(weight,val,capacity,n,(int*)dp)<<endl;  //Pass 2D matrix into function as integer pointer 
+  return 0;
 }
