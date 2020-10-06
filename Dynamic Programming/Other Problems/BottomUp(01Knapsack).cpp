@@ -23,9 +23,9 @@ int main()
   {
     for(int j=1;j<=n;j++)
     {
-       if(weight[j-1]<=i)  //Can include the item
+       if(weight[j]<=i)  //Can include the item
        {
-         dp[i][j]=max(val[j-1]+dp[i-weight[j-1]][j-1],dp[i][j-1]); //first-include , second-not include
+         dp[i][j]=max(val[j]+dp[i-weight[j]][j-1],dp[i][j-1]); //first-include , second-not include
        }
        else //Cannot include the item
        {
