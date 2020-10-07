@@ -13,13 +13,14 @@ bool knap(int weight[],int target,int n,int ** dp)
   //code the choice diagram
   if(weight[n]<=target) //can include
   {
-    return dp[target][n]=knap(weight,target-weight[n],n-1,(int**)dp) || knap(weight,target,n-1,(int**)dp);  /*include || not include*/
+    return dp[target][n]=knap(weight,target-weight[n],n-1,dp) || knap(weight,target,n-1,dp);  /*include || not include*/
   }
   else //cannot include
   {
-    return dp[target][n]=knap(weight,target,n-1,(int**)dp);
+    return dp[target][n]=knap(weight,target,n-1,dp);
   }
 }
+
 int main()
 {
   int n;
