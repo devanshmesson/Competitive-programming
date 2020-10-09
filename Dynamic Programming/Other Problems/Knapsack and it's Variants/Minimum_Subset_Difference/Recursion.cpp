@@ -31,6 +31,16 @@ int main()
   for(int i=1;i<=n;i++){cin>>weight[i];sum+=weight[i];}
   target=sum/2;
   int subsetsum1,subsetsum2;
+ 
+  /*if sum=20
+    then we would prefer to have 0 difference between sums of any two subsets.
+    Hows that possible?
+    sum of first subset=sum of second subset (10=10)
+    if that's not possible as per the given array(if sum 10 does not exist in the array)
+    then we would go with next minimum case that is 9 and 11. and so on.
+    
+    check from sum/2 to 0, if in between any sum got found in tha array we will take that sum becuase difference cant be more minimum.
+  */
   for(int i=target;i>=0;i--)
   {
      if(subset(weight,i,n)==1){subsetsum1=i;break;}
