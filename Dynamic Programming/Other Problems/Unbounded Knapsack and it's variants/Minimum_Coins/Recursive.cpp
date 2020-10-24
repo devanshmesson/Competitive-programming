@@ -2,7 +2,7 @@
 Problem-Given a set of coins and a target sum.
 Task-Find Minimum number of coins required to achive the required sum.
 
-*/
+/*
  This problem boils down to minimizing cost of adding item to knapsack.
  
  Cost of including every item=1.
