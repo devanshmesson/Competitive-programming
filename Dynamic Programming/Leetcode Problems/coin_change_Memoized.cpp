@@ -9,15 +9,20 @@ class Solution
        sort(coins.begin(),coins.end());
        small=coins[0];
           
-       vector<vector<int>>dp(n+1,vector<int>(amount+1,-1));
+       int** dp=new int*[n+1];
+       for(int i=0;i<=n;i++)dp[i]=new int[amount+1];
+       
+       for(int i=0;i<=n;i++)
+       for(int j=0;j<=amount;j++)
+       dp[i][j]=-1;
 
-       int answer=coinchange1(coins,n,amount,dp,small);
+       int answer=coinchange1(coins,n,amount,dp);
 
        if(answer==1e9)return -1;
        else return answer;
    }
 
-   int coinchange1(vector<int>& coins,int n,int sum,vector<vector<int>>& dp,int small)
+   int coinchange1(vector<int>& coins,int n,int sum,int** dp)
    {
 
    //base condition
@@ -31,11 +36,11 @@ class Solution
   //choice diagram
   if(coins[n-1]<=sum)
   {
-    return dp[n][sum]=min(1+coinchange1(coins,n,sum-coins[n-1],dp,small),coinchange1(coins,n-1,sum,dp,small));
+    return dp[n][sum]=min(1+coinchange1(coins,n,sum-coins[n-1],dp),coinchange1(coins,n-1,sum,dp));
   }
   else
   {
-    return dp[n][sum]=coinchange1(coins,n-1,sum,dp,small);
+    return dp[n][sum]=coinchange1(coins,n-1,sum,dp);
   }
  }
 };
