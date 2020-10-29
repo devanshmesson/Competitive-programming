@@ -3,8 +3,10 @@ Longest common subsequence
 Two strings are given.Find out a subsequence which exists in both strings and its length is maximum over all possible common subsequences.
 
 Why DP is used to solve this problem?
--Because there is a need to check all the possibilities/subproblems in both strings and these subproblems may overlap.
-DP checks all possibilities and picks up the optimal(minimum/maximum) one that is what we need in this problem.
+-Because there is a need to check all the possibilities/subproblems in both strings and these subproblems are overlapping so its better to store the 
+result so that we dont compute it again if it was already being computed.
+
+DP checks all possibilities and stores the results and picks up the optimal(minimum/maximum) one that is what we need in this problem.
 */
 #include<bits/stdc++.h>
 using namespace std;
