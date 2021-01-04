@@ -5,52 +5,19 @@ using namespace std;
 #define endl "\n"
 int main()
 {
+    freopen
     io
     #define int long long int
     int t;
     cin>>t;
     while(t--)
     {
-       int w,h,n;
-       cin>>w>>h>>n;
-       if(n==1){cout<<"YES"<<endl;continue;}
-       int ans=1;
-       while(1)
-       {
-          int ok=0;
-          if(w%2==h%2 && w%2==0)
-          {
-            if(w>=h && w>1)
-            {
-              ok=1;
-              w/=2;
-              ans*=2;
-            }
-            else if(w<h && h>1)
-            {
-              ok=1;
-              h/=2;
-              ans*=2;
-            }
-          }
-          else if(w%2!=h%2)
-          {
-             if(w%2==0 && w>1)
-             {
-               ok=1;
-               w/=2;
-               ans*=2;
-             }
-             else if(h%2==0 && h>1)
-             {
-               ok=1;
-               h/=2;
-               ans*=2;
-             }
-          }
-          if(ok==0)break;
-       }
-       if(ans>=n)cout<<"YES"<<endl;
-       else cout<<"NO"<<endl;
+     int w,h,n;
+     cin>>w>>h>>n;
+     int a=__gcd(w,1ll<<14); // Calculating largest power of 2 which can divide w
+     int b=__gcd(h,1ll<<14); // Calculating largest power of 2 which can divide h
+     //2^14 is taken as reference because its greater than 10^4 (input)
+     if(a*b>=n)cout<<"YES"<<endl;
+     else cout<<"NO"<<endl;
     }
-}
+} 
