@@ -5,7 +5,6 @@ using namespace std;
 #define endl "\n"
 int main()
 {
-    freopen
     io
     #define int long long int
     int t;
