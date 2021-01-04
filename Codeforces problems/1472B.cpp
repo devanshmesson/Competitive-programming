@@ -11,39 +11,21 @@ int main()
     cin>>t;
     while(t--)
     {
-       int n,sum=0;
-       cin>>n;
-       int a[n+1];
-       for(int i=1;i<=n;i++)
-       {
-        cin>>a[i];
-        sum+=a[i];
-       }
-       if(sum%2==1){cout<<"NO"<<endl;continue;}
-
-       int target=sum/2;
-
-       int dp[n+1][target+1];
-
-       //base case
-       for(int i=1;i<=target;i++)dp[0][i]=0;
-       for(int i=0;i<=n;i++)dp[i][0]=1;
-
-       for(int i=1;i<=target;i++)
-       {
-        for(int j=1;j<=n;j++)
-        {
-          if(a[j]<=i)
-          {
-            dp[j][i]=dp[j-1][i-a[j]] | dp[j-1][i];
-          }
-          else 
-          {
-            dp[j][i]=dp[j-1][i];
-          }
-        } 
-       }
-       if(dp[n][target]==1)cout<<"YES"<<endl;
-       else cout<<"NO"<<endl;
+      int n,a;
+      cin>>n;
+      int one=0,two=0;
+      for(int i=0;i<n;i++)
+      {
+        cin>>a;
+        if(a==2)two++;
+        if(a==1)one++;
+      }
+      int sum=(two*2+one),var;
+      if(sum%2==1){cout<<"NO"<<endl;continue;}
+ 
+      int target=sum/2;
+ 
+      if(target%2==0 || (target%2==1 && one>0))cout<<"YES"<<endl;
+      else cout<<"NO"<<endl;  
     }
 }
