@@ -45,15 +45,31 @@ Problem in my words - There are 'n' numbers in the array
              
              8.We need to find out the missing number and the duplicate number from 4.Thats our task.
              
-             
-             
-             
+             9.To acomplish the task in point 8, lets think about (4th point of XOR property).
+               9.1 So we have to find a bit(ith) that is set in 4.
+               9.2 We have to find a number which has ith bit set and another number which has ith bit not-set.
+               9.3 To do this, we should look at all such possibilities which satisfies 9.2
+               9.4 To look at all possibilities , Divide the range[1 to n] in two buckets.
+               9.5 One bucket has numbers(from range [1-n] ) which has ith bit set and another bucket has numbers(from range [1-n]) which has ith bit not-set.
+               9.6 Now we have the numbers,rather than trying all possibilities,we should ommit those n-2 numbers which were discussed in point 1.
+               9.7 These n-2 numbers are not part of either duplicate number and repeted number so they must be Omitted by XORRING them with the numbers in the buckets.
+               9.8 After you ommit those n-2 numbers you are left with two numbers , one in each bucket which your ANSWER!!
                
-             
-             : 
-      
-
-
+               9.9 Let me take an example of the above steps from 9.1 to 9.8
+                   9.9.1 Result after XORRING in point 7 was 4.
+                   9.9.2 2nd bit in 4 is set.If x^y=4,then x is a number which has 2nd bit set and y is a number which has 2nd bit not set.
+                   9.9.3 Its obvious that missing number and duplicate number are from the range [1 to 6]
+                   9.9.4 Looking at all possibilites by diving the range [1 2 3 4 5 6] into two buckets.Refer 9.5
+                   9.9.5 Bucket-1 contains [4 5 6] AND bucket-2 contains [1 2 3]
+                   9.9.6 Rather than trying out all possibilities by taking a pair,(each number from both buckets), we should first ommit
+                         those n-2=4 numbers.Those 4 numbers were 2 3 4 6.
+                   9.9.7 Dividing these 4 numbers and XORRING them to ommit.
+                   9.9.8 Bucket-1 contains [4 4 5 6 6] AND bucket-2 contains [1 2 2 3 3]
+                   9.9.9 After Xorring all numbers of Bucket-1, it contains a number 5.
+                   9.9.10 After Xorring all numbers of Bucket-2, it contains a number 1.
+                   9.9.11 You Got your 2 numbers which are the answers to your question.
+                   
+            10.To figure which of these numbers is the missing number and which of these is the duplicate number , you can check it by traversing the given array.
 */
 class Solution
 {
