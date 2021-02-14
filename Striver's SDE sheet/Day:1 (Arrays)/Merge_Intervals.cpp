@@ -1,110 +1,94 @@
-/**
- * Return an array of arrays of size *returnSize.
- * The sizes of the arrays are returned as *returnColumnSizes array.
- * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
- */
+class Solution 
+{
+ public:
+ #define pb push_back
 struct interval
 {
-  int val,ind;   
+  int val1,val2;   
 };
 
-void merge_arrays(int l,int mid,int r, int intervalsSize,int **intervals)
+void merge_arrays(int l,int mid,int r,vector<vector<int>>&interval)
 {
-    struct interval left[intervalsSize],right[intervalsSize];
+    struct interval left[r-l+1],right[r-l+1];
     int p=0,q=0;
     for(int i=l;i<=mid;i++)
     {
-      left[p].val=intervals[i][0];
-      left[p].ind=i;
+      left[p].val1=interval[i][0];
+      left[p].val2=interval[i][1];
       p++;
     }
     for(int i=mid+1;i<=r;i++)
     {
-      right[q].val=intervals[i][0];
-      right[q].ind=i;
+      right[q].val1=interval[i][0];
+      right[q].val2=interval[i][1];
       q++;
     }
     
-    int i=0,j=0,ind=l;
+    int i=0,j=0,in=l;
+
     while(i<p && j<q)
     {
-      if(left[i].val<=right[j].val)
+      if(left[i].val1<right[j].val1)
       {
-          intervals[ind][0]=left[i].val;
-          intervals[ind][1]=intervals[left[i].ind][1];
+          interval[in][0]=left[i].val1;
+          interval[in][1]=left[i].val2;
           i++;
       }
       else
       {
-          intervals[ind][0]=right[j].val;
-          intervals[ind][1]=intervals[right[j].ind][1];
+          interval[in][0]=right[j].val1;
+          interval[in][1]=right[j].val2;
           j++;
       }
-      ind++;
+      in++;
     }
     
     while(i<p)
     {
-        intervals[ind][0]=left[i].val;
-        intervals[ind][1]=intervals[left[i].ind][1];
-        ind++;
+        interval[in][0]=left[i].val1;
+        interval[in][1]=left[i].val2;
+        in++;
         i++;
     }
     
     while(j<q)
     {
-        intervals[ind][0]=right[j].val;
-        intervals[ind][1]=intervals[right[j].ind][1];
-        ind++;
+        interval[in][0]=right[j].val1;
+        interval[in][1]=right[j].val2;
+        in++;
         j++;
-    }       
+    }  
 }
 
-void mergesort(int** intervals,int l,int r,int intervalsSize)
+void mergesort(vector<vector<int>>&interval,int l,int r)
 {
     if(l<r)
     {
         int mid=(l+r)/2;
-        mergesort(intervals,l,mid,intervalsSize);
-        mergesort(intervals,mid+1,r,intervalsSize);
-        return merge_arrays(l,mid,r,intervalsSize,intervals);
+        mergesort(interval,l,mid);
+        mergesort(interval,mid+1,r);
+        merge_arrays(l,mid,r,interval);
     }
-    
 }
-int max(int a,int b)
+vector<vector<int>> merge(vector<vector<int>>& intervals) 
 {
-    if(a>=b)return a;
-    else return b;
-}
-
-int** merge(int** intervals, int intervalsSize, int* intervalsColSize, int* returnSize, int** returnColumnSizes)
-{
-  //mergesort(intervals,0,intervalsSize-1,intervalsSize);
-  int top=0;
-  int **ans=(int**)malloc((intervalsSize+10)*sizeof(int));
-  for(int i=0;i<intervalsSize;i++)
+  int intervalsSize=intervals.size();
+  if(intervalsSize==1)return intervals;
+  mergesort(intervals,0,intervalsSize-1);
+  vector<vector<int>>inter;
+  for(int i=1;i<intervalsSize;i++)
   {
-      ans[i]=(int*)malloc(2*sizeof(int));
+     if(i>=1 && intervals[i][0]<=intervals[i-1][1])
+     {
+         intervals[i][1]=max(intervals[i][1],intervals[i-1][1]);
+         intervals[i][0]=intervals[i-1][0];
+     }
+     else
+     {
+         inter.pb(intervals[i-1]);
+     }
   }
-    
-   int in=0;
-
-  // for(int i=1;i<intervalsSize;i++)
-  // {
-  //    if(intervals[i][0]<=intervals[i-1][1])
-  //    {
-  //        intervals[i][1]=max(intervals[i][1],intervals[i-1][1]);
-  //        intervals[i][0]=intervals[i-1][0];
-  //    }
-  //    else
-  //    {
-  //        ans[in][0]=intervals[i-1][0];
-  //        ans[in][1]=intervals[i-1][1];
-  //        in++;
-  //    }
-  // }
-    return intervals;
-    // free(ans);
-    
-    
-}
+     inter.pb(intervals[intervalsSize-1]);
+     return inter;
+    }
+};
