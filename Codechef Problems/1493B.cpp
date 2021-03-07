@@ -1,7 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-
 int verify(int n)
 {
   int num=n;
@@ -71,51 +70,22 @@ main()
    cin>>s;
    vector<int>time=string_to_int(s);
    int hours=time[0],minutes=time[1];
-   //cout<<hours<<" "<<minutes<<endl; 
-   reverse(s.begin(),s.end());
-
-   for(int i=0;i<s.size();i++)
-   {
-     if(s[i]=='2')s[i]='5';
-     else if(s[i]=='5')s[i]='2';
-   }
-   vector<int>mirrortime=string_to_int(s);
-   int mhours=mirrortime[0],mminutes=mirrortime[1];
-   
-   //cout<<mhours<<" "<<mminutes<<endl;
-   if(mhours<=h-1 &&  mminutes<=m-1 && verify(mhours)==1 && verify(mminutes)==1)
-   {
-     reverse(s.begin(),s.end());
-     for(int i=0;i<s.size();i++)
-   {
-     if(s[i]=='2')s[i]='5';
-     else if(s[i]=='5')s[i]='2';
-   }
-     cout<<s<<endl;
-     continue;
-   }
-
    int hrs=hours,mints=minutes,revh,revm;
 
    while(1)
    {
-     mints++;
-     mints%=m;
-     if(mints==0)
-      {
-        hrs++;
-        hrs%=h;
-      }
-      if(verify(hrs)==1 && verify(mints)==1)
-      {
-        revh=reverse_num(hrs);
+      if(verify(hrs)==1 && verify(mints)==1)  //Writing this if condition first in order to handle the case if the inputted time itself when reflected is valid or not.
+      {                                       //In other words, if the inputted time is the valid nearest future time.
+        revh=reverse_num(hrs);                //If lines 1,2,3 are written above this "if condition then the above two lines will not be handled.Then that case will be handled seperately."
         revm=reverse_num(mints);
-
-         if(revm<=h-1 && revh<=m-1)
-         {
-            
-            break;
-         }
+        if(revm<=h-1 && revh<=m-1)break;
+      }
+     mints++;      //1
+     mints%=m;     //2
+     if(mints==0)  //3
+      {
+        hrs++;     
+        hrs%=h;
       }
    }
 
