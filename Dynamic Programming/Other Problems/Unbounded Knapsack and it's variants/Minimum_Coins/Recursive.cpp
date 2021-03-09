@@ -30,7 +30,7 @@ int coinchange1(int coin[],int n,int sum)
   //choice diagram
   if(coin[n]<=sum)
   {
-    return (min(1+coinchange1(coin,n,sum-coin[n]),coinchange1(coin,n-1,sum))); min(include the item multiple times , not include the item)
+    return (min(1+coinchange1(coin,n,sum-coin[n]),coinchange1(coin,n-1,sum))); //min(include the item multiple times , not include the item)
     
     /*
      2 ways to achieve the sum.
