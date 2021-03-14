@@ -4,6 +4,25 @@ Link - https://leetcode.com/problems/longest-palindromic-subsequence/
 
 A palindrome means that if we read a string from front, it will be exactly same when it is being read from it's back.
 
+In other words, we can say that, we have to find longest subsequence which is common between a string and it's reverse.
+
+So, take another string 't' which is reverse of string 's'.Find the longest common subsequence between string s and string t;
+
+|------------------------------------|
+|    LPS(s) = LCS (s,reverse(s))     |
+|------------------------------------|
+
+INPUT      PROBLEM   OUTPUT
+a:        LCS       INT
+b:
+--------------------------
+a:        LPS       INT
+rev(a):
+
+Match    not        match
+-ing    matching    -ing
+
+Score 2/3 [2 out of 3 things are matching so LCS is a parent question of LCS]
 */
 class Solution 
 {
@@ -33,7 +52,6 @@ public:
                 else dp[i][j]=max(dp[i-1][j] , dp[i][j-1]); 
             }
         }
-        
         return dp[n][n];
     }
 };
