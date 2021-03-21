@@ -1,68 +1,36 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long int
-
-int xored(int x)
-{
-  if(x%4==0)return x;
-  if(x%4==1)return 1;
-  if(x%4==2)return x+1;
-  if(x%4==3)return 0;
-}
 main()
 {
-  ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);  
+  ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
   int t;
   cin>>t;
   while(t--)
   {
-    int n,m,k,ans=0;
+    int n,m,k;
     cin>>n>>m>>k;
-    
-    if(n==1 && m==1)
+    //Use difference array to calculate frequencey of a number
+    //in the matrix.As the numbers are in particular range, we can take 
+    //advantage of difference arrays.
+    int diff[n+m+1]={0};
+    for(int i=1;i<=n;i++)
     {
-      cout<<2+k<<endl;
-      continue;
+      int l=i+1;
+      int r=i+m;
+      diff[l]+=1;
+      diff[r+1]-=1;
     }
-    else if(n==1 || m==1)
+    int ans=0;
+    for(int i=2;i<=n+m;i++)
     {
-      int l=2+k;
-      int r=n+m+k;
-      int ans=xored(l-1)^xored(r);
-      cout<<ans<<endl;
-      continue;
-    }
-  
+      if(i>2)diff[i]+=diff[i-1];
 
-  int till;
-  if(n%2==1)till=n-2;
-  else till=n;
-
-   for(int i=1;i<=till;i++)
-    {
-      int plus;
-      if(i%2==1)plus=1;
-      else plus=m;
-      int g=i+plus+k;
-      ans^=g;
-    }
-    
-    if(n%2==0)
+      if(diff[i]%2==1)
       {
-        cout<<ans<<endl;
-        continue;
+        ans^=i+k;
       }
-
-      if(n%2==1)
-      {
-        int a=n+1+k;
-        int b=n+m+k;
-
-        int f=xored(a-1)^xored(b);
-        f^=(n-1+m+k);
-        ans=ans^f;
-        cout<<ans<<endl;
-        continue;
-      }
+    }
+    cout<<ans<<endl;
   }
 }
