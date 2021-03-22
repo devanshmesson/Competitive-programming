@@ -1,5 +1,6 @@
 /*
 Problem - N number of matrices are given, Task is to multiply all the matrices by performing minimum number of multplications.
+Link- https://practice.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1#
 
 Expected Time Complexity: O(N^3)
 Expected Auxiliary Space: O(N^2)
