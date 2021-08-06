@@ -13,7 +13,7 @@ Dutch national flag algorithm will segregate 0 , 1 , 2 with the help of three po
 
 After segregation array will look like this:
 
-Considering 1 based indexing.
+Considering 0 based indexing.
 index 0 to low-1 will have 0's
 index low to high will have 1's
 index high+1 to n-1 will have 2's
