@@ -4,7 +4,7 @@ Required Time complexity - O(n) (use only one O(n) loop to solve the problem , O
 Required Space Complexity - O(1)
 
 
-Problem in my words -  Given an array containing 0,1,2.Sort the algorithm.
+Problem in my words -  Given an array containing 0,1,2.Sort the array
 
 Solution - Dutch national flag algorithm will be used to solve the problem in only one O(n) loop.Counting sort method will use 2 O(n) loops.So 
 Dutch national flag algorithm is an optimization of counting sort.
