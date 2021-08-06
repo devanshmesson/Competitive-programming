@@ -8,7 +8,7 @@ Solution 1 : O(n^3) approach [Bruteforce]
 Generate all (n)*(n+1)/2 subsets.~ O(n^2)
 iterate each subset. ~O(n)
 
-Total time complexity - O(n^2) * O(n) = O(n^2)
+Total time complexity - O(n^2) * O(n) = O(n^3)
 -------------------------------------------------
 Solution 2 : O(n^2) [Bruteforce]
 generate all (n)*(n+1)/2 subsets. ~ O(n^2)
