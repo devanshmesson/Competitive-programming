@@ -3,7 +3,9 @@ Problem Link - https://practice.geeksforgeeks.org/problems/find-missing-and-repe
 Expected Time Complexity: O(N)
 Expected Auxiliary Space: O(1)
 
-Solution - Using XOR
+Solution 1  - Sort the array ,  Time- O(NLogN) Space - O(1)
+Soultion 2 - Hashing , Time - (O(2*N)), Space - O(N)
+Solution 3 - Using XOR , Time - O(N), Space - O(1)
 
 Problem in my words - There are 'n' numbers in the array
                     - Out of those n numbers , one number is repeted 2 times and one number is missing.
