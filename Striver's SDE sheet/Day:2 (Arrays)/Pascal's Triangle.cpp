@@ -33,6 +33,45 @@ Time complexity - O(row^2)
 
 Solution:2 Use the formula of nCr. Time complexity - O(row)
 for example to calculate element value at 5th row 4th column(0 based indexing), just apply 5C4.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Variant:2 (Problem Link - https://leetcode.com/problems/pascals-triangle-ii/submissions/)
+To find a particular row of pascal triangle, say ith row.
+Solution 1: Calulate all elements of every row,till we reach the row which is suppossed to be calculated. Time complexity - O(row^2)
+Solution 2: Calculate only ith row, by traversing all elements and calculating the value by the nCr formula. Time complexity - O(row^2).
+
+Code for solution 2 - 
+class Solution {
+public:
+    int ncr(int n,int r)
+    {
+        if(r==0 || r==n)return 1;
+        int res=1,stop,num=1,den=1;
+        r=min(r,n-r);
+        stop=r;
+        
+        while(r!=0)
+        { 
+        int div=__gcd(num,den);
+        num/=div;
+        den/=div;
+        num*=n;
+        den*=r;
+        n--;
+        r--;
+        }
+        res=num/den;
+        return res;
+    }
+    vector<int> getRow(int rowIndex) 
+    {
+        vector<int>ans;
+        for(int i=0;i<=rowIndex;i++)
+        {
+         ans.push_back(ncr(rowIndex,i)); 
+        }
+        return ans;
+    }
+};
 */
 
 vector<vector<int>> generate(int numRows) 
