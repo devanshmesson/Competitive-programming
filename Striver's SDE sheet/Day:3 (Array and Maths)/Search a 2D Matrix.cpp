@@ -9,11 +9,9 @@ Time complexity - O(NLogM) OR O(MLogN)
 Solution:3 
 
 Observation:
-1. 1st column is in increasing order.
-2.Figure out the ith row in which the element could be present.
-3. 1st element of ith row must be smaller or equal to target element.
-4. Binary search on the 1st column and find the greatest ith element which is smaller than or equal to target element."i" is the index of the row.
-5. Binary searc on the ith row and find the target element.
+1. Find the ith row in which the element could be present, then find the jth column in the ith row to know where the element exactly is.
+2. Binary search on the 1st column and find the greatest ith element which is smaller than or equal to target element."i" is the index of the row.
+3. Binary searc on the ith row and find the target element.
 
 Time complexity - O(LogN + LogM)
 
