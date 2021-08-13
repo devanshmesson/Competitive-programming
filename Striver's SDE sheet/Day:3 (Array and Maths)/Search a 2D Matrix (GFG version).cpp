@@ -34,6 +34,13 @@ What will happen if we start our search from top-left corner?
 -We will not be able to remove the row/column where the element cannot exist due the condition given, So we have to traverse all rows and columns to find X.
 
 
+Time complexity - O(m+n), because i must be less than n and j must be greater than 0 as we are doing i++ and j - -.
+So at max, m+n comparisons can be done.
+
+Case when m+n comparisons are done:
+When the target element is located at bottom left of matrix and you start from top right of the matrix.
+
+
 */
 class Solution{
 public:	
