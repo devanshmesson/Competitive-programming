@@ -21,13 +21,20 @@
  2.Intuition behind this algorithm is that cancel all the minority elements(let their count be x) with "x" amount of majority elements and 
  remaining number of elements will only constitute of majority element.
  
- Proof of 2: 
+ Proof of point 2: 
  Total number of elements - n
  Number of majority element - a
  Number of Minority elements - b
  a+b=n
+ a=6
+ b=5
 cancel all the minority elements(let their count be a) with "a" amount of majority elements.
-a=a-b
+ a=a-b
+ a=1
+ So, the left element is a, which this is the majority element.
+ 
+ 
+ 
  
  
   
