@@ -29,10 +29,7 @@ public:
                 ans*=x;
             }
         }
-     // if()cout<<ans<<endl;
-     if(isnegative==true)ans=1/ans;
-     return ans;
-        
-        
+     if(isnegative==true)ans=(double)1/(double)ans;
+     return ans;        
     }
 };
