@@ -14,7 +14,7 @@
  Solution:3
  Run a O(n) loop and increase the count of particular number by storing it as index of the array.In other words, peform hashing.
  Time complexity(Map)- O(nlOGn) | Time complexity(array)- O(n)
- Space complexity - O(1)
+ Space complexity - O(n)
  
  Solution:4
  1.Perform Moore's Voting Algorithm
@@ -33,12 +33,8 @@ cancel all the minority elements(let their count be a) with "a" amount of majori
  a=1
  So, the left element is a, which this is the majority element.
  
- 
- 
- 
- 
-  
- 
+ Time complexity- O(n)
+ Space complexity - O(1)
 */
 class Solution {
 public:
