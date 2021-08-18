@@ -33,14 +33,17 @@ Now, sum=target, so elements are at indexes 2 and 3.
 2 pointer approach is O(n).
 
 Important:
-To find 
+To find unique quadruples, Skip the repeating pointers.
+For example: 1 1 1 2 2 3 3 
+i=0
+j=1
 
+if j is incremented, j=2
+but a[2]=a[1], which will produce the same quadrlet, so skip the j pointer ahead, where a[new j]!=a[previous j]
 
-
-
-
-
-
+Time complexity - O(n^3)
+Two nested loops - O(n^2) 
+Two pointer approach - O(n)
 */
 class Solution {
 public:
