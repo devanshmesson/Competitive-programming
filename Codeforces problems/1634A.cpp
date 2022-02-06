@@ -34,9 +34,11 @@ signed main()
     {
       if(s[i]!=s[j]){flag=0;break;}
     }
-    if(flag==0)cout<<min(2LL,k)<<endl;
-    else cout<<min(1LL,k)<<endl;
+    if(flag==0)cout<<2<<endl;
+    else cout<<1<<endl;
   }
+
+  
 }
     /*1.Never overkill a problem.
       2.think of test ca
@@ -46,3 +48,8 @@ signed main()
       5.don’t use multiplication operator unless necessary, Otherwise, it will be TLE!
       6.Check datatype of variables, sometimes wrong datatype lead to WA.
     */ 
+    
+    
+    
+    
+    
