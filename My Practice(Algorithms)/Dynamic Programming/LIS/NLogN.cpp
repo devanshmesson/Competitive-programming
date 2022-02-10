@@ -1,13 +1,14 @@
 //Strictly increasing
+// taskkill /IM "a.exe" /F
 #include<bits/stdc++.h>
 using namespace std;
-
+ 
 #ifndef ONLINE_JUDGE
 #define freopen freopen("input.txt","r",stdin); freopen("output.txt","w",stdout);
 #else 
 #define freopen 
 #endif
-
+ 
 #define pb push_back
 #define pf push_front
 #define endl "\n"
@@ -23,7 +24,7 @@ int lis(vector<int>&a,int n)
   {
     int lbound=lower_bound(potential.begin(),potential.end(),a[i])-potential.begin();
     if(lbound==0){potential[0]=a[i];}
-    else if(potential[lbound-1]<a[i]) 
+    else 
     {
       potential[lbound]=min(potential[lbound],a[i]);
       maxi=max(maxi,lbound);
@@ -31,8 +32,8 @@ int lis(vector<int>&a,int n)
   }
   return maxi+1;
 }
-
-
+ 
+ 
 signed main()
 {
   freopen
@@ -53,8 +54,4 @@ signed main()
       5.don’t use multiplication operator unless necessary, Otherwise, it will be TLE!
       6.Check datatype of variables, sometimes wrong datatype lead to WA.
     */ 
-    
-    
-    
-    
     
