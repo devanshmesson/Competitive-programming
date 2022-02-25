@@ -29,11 +29,9 @@ signed main()
   {
     int x,y,n;
     cin>>x>>y>>n;
-    int ans=n/x;
-    ans=(ans*x);
-    int diff=n-ans;
-    if(diff>=y)cout<<ans+y<<endl;
-    else cout<<ans-x+y<<endl;
+    int diff=n%x;
+    if(diff>=y)cout<<n-diff+y<<endl;
+    else cout<<n-diff-x+y<<endl;
 
 
 
