@@ -3,7 +3,7 @@
 using namespace std;
  
 #ifndef ONLINE_JUDGE
-#define freopen freopen("input.txt","r",stdin); freopen("output.txt","w",stdout);
+#define freopen freopen("input.txt","r",stdin); freopen("out.txt","w",stdout);
 #else 
 #define freopen 
 #endif
@@ -23,33 +23,27 @@ signed main()
   ios
   int t;
   cin>>t;
-  while(t--)
+  for(int tt=1;tt<=t;tt++)
   {
     int n,x;
     cin>>n>>x;
     int a[n+1];
     map<int,int>mp;
+    string s;
     for(int i=0;i<n;i++)
       {
         cin>>a[i];
         mp[a[i]]++;
       }
-    int ans=0;
     sort(a,a+n);
+    int ans=0;
     for(int i=0;i<n;i++)
     { 
-      int f1=0,f2=0;
-      if(a[i]%x==0)f1=a[i]/x;
-      f2=a[i]*x;
+      int f1=a[i]*x;
       if(mp[a[i]]==0)continue;
-      if(mp[f1]>0 && a[i]%x==0)
+      if(mp[f1]>0)
       {
         mp[f1]--;
-        mp[a[i]]--;
-      }
-      else if(mp[f2]>0)
-      {
-        mp[f2]--;
         mp[a[i]]--;
       }
       else
