@@ -97,7 +97,45 @@ public:
 /*
 Approach - 4
 
-
 Time complexity - O(N)
 Space complexity - O(1)
 */
+
+class Solution 
+{
+public:
+    void reverse(int l, int r,vector<int>&nums)
+    {
+      for(int i=l,j=r;i<j;i++,j--)
+      {
+          int temp=nums[i];
+          nums[i]=nums[j];
+          nums[j]=temp;
+      }
+    }
+    void rotate(vector<int>& nums, int k) 
+    {
+      int n=nums.size();
+      int skip=k%n;
+      /*
+       Prefix of length=(n-skip) should become Suffix length=(n-skip).
+       Suffix of length=skip should become prefix of length=skip.
+       
+       Order of elements should be same.
+       
+       To do this.
+       1.Reverse the whole array
+         - Reversed Prefix will become suffix and Reversed suffix will become prefix.
+       2.Reverse the Suffix of length=(n-skip) of the reversed array to make it a equal to                      prefix(length = n-skip) of  original array.
+       3.Reverse the Prefix of length=(skip) of the reversed array to make it a equal to suffix(length          = skip) of original array.
+      */
+      //Doing point 1
+      reverse(0,n-1,nums);
+      // Doing point 2
+      reverse(skip,n-1, nums);
+      //Doing point 3
+      reverse(0,skip-1, nums);
+      
+    
+    }
+};
