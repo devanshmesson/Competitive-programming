@@ -8,7 +8,7 @@ else add this node to the ans and increment j.
 
 if the traversal of any of two linked list ends, add the rest of the elements of another list to the ans.
 
-*/
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -19,6 +19,98 @@ if the traversal of any of two linked list ends, add the rest of the elements of
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+/*
+Approach -1 
+Same as two pointer approach, but here I am making a new linked list and I am storing the ans in that new linked list.
+Time complexity - O(n+m)
+Space Complexity - O(n+m)
+*/
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) 
+    {
+      if(list1==NULL && list2==NULL)return NULL;
+      ListNode* headans;
+      ListNode* tailans;
+      headans=tailans=new ListNode();
+      
+      int flag=0;
+    
+      
+      while(list1!=NULL && list2!=NULL)
+      {
+        if(list1->val < list2->val)
+        {
+          cout<<list1->val <<" "<<list2->val<<endl;
+          if(flag==0)
+          {
+              tailans->val=list1->val;
+              flag=1;
+          }
+          else 
+          {
+              tailans->next=new ListNode(list1->val);
+              tailans=tailans->next;
+          }
+          list1=list1->next;
+        }
+        else
+        {
+          cout<<list1->val <<" "<<list2->val<<endl;
+          if(flag==0)
+          {
+              tailans->val=list2->val;
+              flag=1;
+          }
+          else 
+          {
+              tailans->next=new ListNode(list2->val);
+              tailans=tailans->next;
+          }
+          list2=list2->next;
+        }
+      }
+        
+      while(list1!=NULL)
+      {
+        if(flag==0)
+        {
+            tailans->val=list1->val;
+            flag=1;
+        }
+        else 
+        {
+         tailans->next=new ListNode(list1->val);
+         tailans=tailans->next;
+        }
+        list1=list1->next;
+      }
+      while(list2!=NULL)
+      {
+         if(flag==0)
+         {
+            tailans->val=list2->val;
+            flag=1;
+         }
+         else 
+         {
+          tailans->next=new ListNode(list2->val);
+          tailans=tailans->next;
+         }
+        list2=list2->next;
+      }
+      return headans;
+    }
+};
+
+/*
+Approach - 2
+Same as two pointer approach, but here, Instead of making a new linkedlist, and I am just changing the links between the input lists.
+
+Time complexity - O(n+m)
+Space Complexity - O(1)
+*/
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) 
