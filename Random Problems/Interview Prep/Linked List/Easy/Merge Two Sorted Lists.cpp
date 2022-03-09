@@ -42,7 +42,6 @@ public:
       {
         if(list1->val < list2->val)
         {
-          cout<<list1->val <<" "<<list2->val<<endl;
           if(flag==0)
           {
               tailans->val=list1->val;
@@ -57,7 +56,6 @@ public:
         }
         else
         {
-          cout<<list1->val <<" "<<list2->val<<endl;
           if(flag==0)
           {
               tailans->val=list2->val;
