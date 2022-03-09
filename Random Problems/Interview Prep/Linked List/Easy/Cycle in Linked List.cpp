@@ -25,7 +25,7 @@ public:
     }
 };
 //-----------------------------------------
-/*Approach 2
+/*Approach 2 (Floyd’s Cycle-Finding Algorithm )
 Using slow pointer and fast pointer
 Time complexity - O(n)
 Space Complexity - O(1)
