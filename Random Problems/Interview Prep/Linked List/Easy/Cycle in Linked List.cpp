@@ -12,7 +12,7 @@ public:
         map<ListNode*,int>mp;
         int ok=0;
         if(head==NULL)return false;
-        while(head->next!=NULL)
+        while(head!=NULL)
         {
             if(mp[head]>0){ok=1;break;}
             mp[head]++;
