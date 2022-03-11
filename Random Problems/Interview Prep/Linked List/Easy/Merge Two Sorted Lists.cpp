@@ -31,6 +31,9 @@ public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) 
     {
       if(list1==NULL && list2==NULL)return NULL;
+      if(list1==NULL && list2!=NULL)return list2;
+      if(list2==NULL && list1!=NULL)return list1;
+    
       ListNode* headans;
       ListNode* tailans;
       headans=tailans=new ListNode();
@@ -72,35 +75,20 @@ public:
         
       while(list1!=NULL)
       {
-        if(flag==0)
-        {
-            tailans->val=list1->val;
-            flag=1;
-        }
-        else 
-        {
          tailans->next=new ListNode(list1->val);
          tailans=tailans->next;
-        }
-        list1=list1->next;
+         list1=list1->next;
       }
       while(list2!=NULL)
       {
-         if(flag==0)
-         {
-            tailans->val=list2->val;
-            flag=1;
-         }
-         else 
-         {
-          tailans->next=new ListNode(list2->val);
-          tailans=tailans->next;
-         }
+        tailans->next=new ListNode(list2->val);
+        tailans=tailans->next;
         list2=list2->next;
       }
       return headans;
     }
 };
+
 
 /*
 Approach - 2
@@ -114,13 +102,11 @@ public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) 
     {
       if(list1==NULL && list2==NULL)return NULL;
+      if(list1==NULL && list2!=NULL)return list2;
+      if(list2==NULL && list1!=NULL)return list1;
       ListNode* headans;
       ListNode* tailans;
-     
-      
       int flag=0;
-    
-      
       while(list1!=NULL && list2!=NULL)
       {
         if(list1->val < list2->val)
@@ -157,32 +143,17 @@ public:
         
       while(list1!=NULL)
       {
-        if(flag==0)
-        {
-            tailans=list1;
-            flag=1;
-        }
-        else 
-        {
-         tailans->next=list1;
-         tailans=tailans->next;
-        }
+        tailans->next=list1;
+        tailans=tailans->next;
         list1=list1->next;
       }
       while(list2!=NULL)
       {
-         if(flag==0)
-         {
-            tailans=list2;
-            flag=1;
-         }
-         else 
-         {
-          tailans->next=list2;
-          tailans=tailans->next;
-         }
+        tailans->next=list2;
+        tailans=tailans->next;
         list2=list2->next;
       }
       return headans;
     }
 };
+
