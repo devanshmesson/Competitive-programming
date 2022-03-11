@@ -3,7 +3,7 @@
 /*
 Approach 1
 TC-O(N+M)
-SC-O(N+M)
+SC-O(N)
 */
 
 /**
