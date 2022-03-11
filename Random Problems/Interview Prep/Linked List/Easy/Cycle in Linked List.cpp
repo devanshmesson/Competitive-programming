@@ -43,22 +43,14 @@ public:
     bool hasCycle(ListNode *head) 
     {
         if(head==NULL)return false;
-        ListNode* fast=head;
-        ListNode* slow=head;
-        int ok=1;
-        while(1)
+        ListNode *slow=head, *fast=head;
+        while(fast->next!=NULL && fast->next->next!=NULL)
         {
-          if(slow->next!=NULL)slow=slow->next;
-          else {ok=0;break;}
-          if(fast->next!=NULL && fast->next->next!=NULL)
-          {
-            fast=(fast->next)->next;
-          }
-          else {ok=0;break;}
-          if(fast==slow){ok=1;break;}
+          slow=slow->next;
+          fast=fast->next->next;
+          if(slow==fast)return true;
         }
-        if(ok==1)return true;
-        else return false;
+        return false;
         
     }
 };
