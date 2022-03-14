@@ -8,25 +8,22 @@ public:
     {
       if(head==NULL)return head;
       ListNode *tail=NULL, *newhead=NULL;
-      ListNode *cur=head;
       int flag=0;
-      while(cur!=NULL)
+      while(head!=NULL)
       {
-          if(cur->val!=val)
+          if(head->val!=val)
           { 
-            if(flag==0){tail=cur; newhead=tail; flag=1;} 
+            if(flag==0){tail=head; newhead=head; flag=1;} 
             else 
             {
-                tail->next=cur;
+                tail->next=head;
                 tail=tail->next;
             }
           }
-          cur=cur->next;
+          head=head->next;
       }
      if(tail!=NULL)tail->next=NULL;
      return newhead;
-    
-        
     }
 };
 
