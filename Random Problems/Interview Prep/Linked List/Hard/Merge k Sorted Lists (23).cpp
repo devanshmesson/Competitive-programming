@@ -82,3 +82,40 @@ public:
       return head->next;
     }
 };
+
+/*
+Approach 3
+TC - O(N * Log(K))
+SC - O(K)
+*/
+class Solution 
+{
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) 
+    {
+      int k=lists.size();
+      if(k==0)return NULL;
+      if(k==1)return lists[0];
+      ListNode *tail=new ListNode();
+      ListNode *head=tail;
+      priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>pq;
+      for(int i=0;i<k;i++)if(lists[i])pq.push({lists[i]->val,i});
+      while(!pq.empty())
+      { 
+        int minival=INT_MAX, minindex=-1;
+        //Finding the next minimum value out of the k lists
+        minival=pq.top().first;
+        minindex=pq.top().second;
+        pq.pop();
+        //Linking the node with minimum value to previous node.
+        tail->next=lists[minindex];
+        //Updating the tail node
+        tail=tail->next;
+        //Incrementing the pointer of the list from which minimum value is fetched.
+        if(lists[minindex])lists[minindex]=lists[minindex]->next;
+        if(lists[minindex])pq.push({lists[minindex]->val,minindex});
+      }
+      //Because first node is dummy node.
+      return head->next;
+    }
+};
