@@ -41,3 +41,41 @@ public:
       return sorted;
     }
 };
+/*
+Approach 2
+TC - (N*K)
+SC- O(1)
+*/
+class Solution 
+{
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) 
+    {
+      int k=lists.size();
+      if(k==0)return NULL;
+      if(k==1)return lists[0];
+      ListNode *tail=new ListNode();
+      ListNode *head=tail;
+      while(1)
+      { 
+        ListNode *mininode=NULL;
+        int minival=INT_MAX, minindex;
+        for(int i=0;i<k;i++)
+        {
+            if(lists[i]==NULL)continue;
+            if(minival>lists[i]->val)
+            {
+                minival=lists[i]->val;
+                mininode=lists[i];
+                minindex=i;
+            }
+        }
+        if(mininode==NULL)break;
+        tail->next=mininode;
+        tail=tail->next;
+        lists[minindex]=lists[minindex]->next;
+      }
+      return head->next;
+    }
+};
+
