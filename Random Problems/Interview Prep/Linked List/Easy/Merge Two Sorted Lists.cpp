@@ -1,28 +1,7 @@
 //https://leetcode.com/problems/merge-two-sorted-lists/
 
 /*
-Two pointer approach
-Put one pointer(i) to list1 and another pointer(j) to list2.
-if value at i < value at j:  add this node to the ans and increment i.
-else add this node to the ans and increment j.
-
-if the traversal of any of two linked list ends, add the rest of the elements of another list to the ans.
-
-
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-
-/*
 Approach -1 
-Same as two pointer approach, but here I am making a new linked list and I am storing the ans in that new linked list.
 Time complexity - O(n+m)
 Space Complexity - O(n+m)
 */
@@ -33,46 +12,23 @@ public:
       if(list1==NULL && list2==NULL)return NULL;
       if(list1==NULL && list2!=NULL)return list2;
       if(list2==NULL && list1!=NULL)return list1;
-    
-      ListNode* headans;
-      ListNode* tailans;
-      headans=tailans=new ListNode();
-      
-      int flag=0;
-    
+      ListNode* tailans=new ListNode;
+      ListNode* headans=tailans;
       
       while(list1!=NULL && list2!=NULL)
       {
         if(list1->val < list2->val)
         {
-          if(flag==0)
-          {
-              tailans->val=list1->val;
-              flag=1;
-          }
-          else 
-          {
-              tailans->next=new ListNode(list1->val);
-              tailans=tailans->next;
-          }
-          list1=list1->next;
+         tailans->next=new ListNode(list1->val);
+         list1=list1->next;
         }
         else
         {
-          if(flag==0)
-          {
-              tailans->val=list2->val;
-              flag=1;
-          }
-          else 
-          {
-              tailans->next=new ListNode(list2->val);
-              tailans=tailans->next;
-          }
+          tailans->next=new ListNode(list2->val);
           list2=list2->next;
         }
+        tailans=tailans->next;
       }
-        
       while(list1!=NULL)
       {
          tailans->next=new ListNode(list1->val);
@@ -85,10 +41,9 @@ public:
         tailans=tailans->next;
         list2=list2->next;
       }
-      return headans;
+      return headans->next;
     }
 };
-
 
 /*
 Approach - 2
@@ -104,56 +59,24 @@ public:
       if(list1==NULL && list2==NULL)return NULL;
       if(list1==NULL && list2!=NULL)return list2;
       if(list2==NULL && list1!=NULL)return list1;
-      ListNode* headans;
-      ListNode* tailans;
-      int flag=0;
+      ListNode* tail=new ListNode();
+      ListNode* head=tail;
       while(list1!=NULL && list2!=NULL)
       {
         if(list1->val < list2->val)
         {
-          if(flag==0)
-          {
-              tailans=list1;
-              headans=list1;
-              flag=1;
-          }
-          else 
-          {
-              tailans->next=list1;
-              tailans=tailans->next;
-          }
-          list1=list1->next;
+         tail->next=list1;
+         list1=list1->next;
         }
         else
         {
-          if(flag==0)
-          {
-              headans=list2;
-              tailans=list2;
-              flag=1;
-          }
-          else 
-          {
-              tailans->next=list2;
-              tailans=tailans->next;
-          }
+          tail->next=list2;
           list2=list2->next;
         }
+        tail=tail->next;
       }
-        
-      while(list1!=NULL)
-      {
-        tailans->next=list1;
-        tailans=tailans->next;
-        list1=list1->next;
-      }
-      while(list2!=NULL)
-      {
-        tailans->next=list2;
-        tailans=tailans->next;
-        list2=list2->next;
-      }
-      return headans;
+      tail->next=list1!=NULL?list1:list2;
+      return head->next;
     }
 };
 
