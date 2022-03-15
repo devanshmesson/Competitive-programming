@@ -58,24 +58,27 @@ public:
       ListNode *head=tail;
       while(1)
       { 
-        ListNode *mininode=NULL;
-        int minival=INT_MAX, minindex;
+        int minival=INT_MAX, minindex=-1;
+        //Finding the next minimum value out of the k lists
         for(int i=0;i<k;i++)
         {
             if(lists[i]==NULL)continue;
             if(minival>lists[i]->val)
             {
                 minival=lists[i]->val;
-                mininode=lists[i];
                 minindex=i;
             }
         }
-        if(mininode==NULL)break;
-        tail->next=mininode;
+        //If traversal of all the k lists are completed.
+        if(minindex==-1)break;
+        //Linking the node with minimum value to previous node.
+        tail->next=lists[minindex];
+        //Updating the tail node
         tail=tail->next;
+        //Incrementing the pointer of the list from which minimum value is fetched.
         lists[minindex]=lists[minindex]->next;
       }
+      //Because first node is dummy node.
       return head->next;
     }
 };
-
