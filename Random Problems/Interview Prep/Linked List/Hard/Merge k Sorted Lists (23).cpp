@@ -25,8 +25,7 @@ public:
         }
         tail=tail->next;
       }
-      if(head1!=NULL){tail->next=head1;}
-      if(head2!=NULL){tail->next=head2;}
+      tail->next=head1!=NULL?head1:head2;
       return head->next;
     }
     ListNode* mergeKLists(vector<ListNode*>& lists) 
