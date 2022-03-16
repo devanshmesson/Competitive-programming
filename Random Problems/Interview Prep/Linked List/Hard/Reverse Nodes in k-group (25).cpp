@@ -10,20 +10,18 @@ public:
         pre->next=head;
         int len=0;
         while(cur!=NULL){cur=cur->next;len++;}
-        ListNode *last=pre, *nextnode=pre;
+        ListNode *last=pre;
         int pos=0;
         while(len>=k)
         {
             last=last->next;
             cur=last->next;
-            nextnode=cur->next;
             for(int i=1;i<k;i++)
             {
               last->next=cur->next;
               cur->next=pre->next;
               pre->next=cur;
-              cur=nextnode;
-              if(nextnode!=NULL)nextnode=nextnode->next;
+              cur=last->next;
             } 
             pre=last;
             len-=k;
