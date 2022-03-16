@@ -119,3 +119,54 @@ public:
       return head->next;
     }
 };
+/*
+Approach - 4
+TC - O(N * Log(K))
+SC - O(1)
+*/
+class Solution 
+{
+public:
+    ListNode* merge2list(ListNode *head1,ListNode* head2)
+    {
+        ListNode* tail=new ListNode();
+        ListNode* head=tail;
+        while(head1 && head2)
+        {
+            if(head1->val < head2->val)
+            {
+                tail->next=head1;
+                head1=head1->next;
+            }
+            else 
+            {
+               tail->next=head2;
+               head2=head2->next; 
+            }
+            tail=tail->next;
+        }
+        tail->next=head1?head1:head2;
+        return head->next;
+    }
+    ListNode* mergeKLists(vector<ListNode*>& lists) 
+    {
+      int k=lists.size();
+      if(k==0)return NULL;
+      if(k==1)return lists[0];
+      ListNode *tail=new ListNode();
+      ListNode *head=tail;
+      int adjacent=1;
+      while(adjacent < k)
+      {   
+          //Merging pairs of adjacent lists and storing the result in the first list.
+          //Adjacent lists are in the form of i,i+adjcent, because in the next iteration,
+          //adjacent of adjacent will become the adjacent.
+          //For example, 0,1,2,3 ->(0,1),(2,3)[adjacent=1]-> 0, 2 [adjacent=adjacent+adjacent=2]-> 0
+          for(int i=0;i+adjacent<k;i+=(adjacent*2)) lists[i]=merge2list(lists[i],lists[i+adjacent]);
+          //Making adjacent=adjacent of adjacent
+          adjacent*=2;
+      }
+      //The result will be store in first list.
+      return lists[0];
+    }
+};
