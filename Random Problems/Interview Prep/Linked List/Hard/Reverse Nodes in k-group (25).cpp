@@ -10,31 +10,23 @@ public:
         pre->next=head;
         int len=0;
         while(cur!=NULL){cur=cur->next;len++;}
-        int stop=len-(len%k)+1;
-        ListNode *last=pre->next, *nextnode=pre->next->next->next;
-        cur=pre->next->next;
-        int pos=2;
-        while(pos<stop)
+        ListNode *last=pre, *nextnode=pre;
+        int pos=0;
+        while(len>=k)
         {
-            last->next=cur->next;
-            cur->next=pre->next;
-            pre->next=cur;
-            
-            if(pos%k==0)
+            last=last->next;
+            cur=last->next;
+            nextnode=cur->next;
+            for(int i=1;i<k;i++)
             {
-              pre=last;
-              if(last)last=last->next;
-              if(last)cur=last->next;
-              if(cur)nextnode=cur->next;
-              pos+=2;
-            }
-            else
-            {
-             //for next iteration
-             cur=nextnode;
-             if(nextnode!=NULL)nextnode=nextnode->next;
-             pos++; 
-            }
+              last->next=cur->next;
+              cur->next=pre->next;
+              pre->next=cur;
+              cur=nextnode;
+              if(nextnode!=NULL)nextnode=nextnode->next;
+            } 
+            pre=last;
+            len-=k;
         }
         return save->next;
     }
