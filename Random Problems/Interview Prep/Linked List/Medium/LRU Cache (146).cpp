@@ -4,7 +4,6 @@ class LRUCache
 public:
     struct node
     {
-      // public:
       int key;
       int val;
       node *next;
@@ -17,92 +16,75 @@ public:
          prev=NULL;
       }
     };
-    
+    //To avoid NULL checks, I have added head and tail.
+    //head's next will be the most recent used key.
+    //tail's prev will be the least recently used key.
     node *head= new node(1,1);
     node *tail=new node(1,1);
-    
     int cap;
     unordered_map<int, node*>address;
-    
+    //helper function to remove node from doubly linked list
+    void removenode(node *oldnode)
+    {
+     oldnode->prev->next=oldnode->next;
+     oldnode->next->prev=oldnode->prev;
+    }
+    //helper function to add node after the head of doubly linked list
+    void addnode(node *newnode)
+    {
+      newnode->next=head->next;
+      head->next->prev=newnode;
+      head->next=newnode;
+      newnode->prev=head;
+    }
     LRUCache(int capacity) 
     {
       cap=capacity;
       head->next=tail;
       tail->prev=head;
     }
-    
     int get(int key) 
     {
       if(address.find(key)!=address.end())
       {
-           node* oldnode=address[key];
-           //Removing the node from doubly linked list
-            oldnode->prev->next=oldnode->next;
-            oldnode->next->prev=oldnode->prev;
-
-            //Adding after the head
-            oldnode->next=head->next;
-            head->next->prev=oldnode;
-            head->next=oldnode;
-            oldnode->prev=head;  
-            return address[key]->val;
+         node* oldnode=address[key];
+         //Removing the node from doubly linked list
+         removenode(oldnode); 
+         //Adding after the head
+         addnode(oldnode);
+         return address[key]->val;
       }
       return -1;
     }
     
     void put(int key, int value) 
     {
+      node* resnode;
       int size=address.size();
       if(address.find(key)!=address.end())
       { 
-         node* oldnode=address[key];
+         resnode=address[key];
          //Updating the value of the node
-         oldnode->val=value;
-
-         if(head->next!=oldnode)
-         {
-            //Removing the node from doubly linked list
-            oldnode->prev->next=oldnode->next;
-            oldnode->next->prev=oldnode->prev;
-
-            //Adding after the head
-            oldnode->next=head->next;
-            head->next->prev=oldnode;
-            head->next=oldnode;
-            oldnode->prev=head;  
-         }   
+         resnode->val=value;
+         //Removing the node from doubly linked list
+         removenode(resnode);  
       }
-      else if(size<cap)
-      {
-        node *newnode=new node(key,value);
-        //Adding after the head
-        newnode->next=head->next;
-        head->next->prev=newnode;
-        head->next=newnode;
-        newnode->prev=head;
-        //Saving the address of key.
-        address[key]=newnode;
-      }
+      else if(size<cap) resnode=new node(key,value);
       else if(size==cap)
       {
-         
          //Removing the Least recently used key (tail's previous)
          node* lru=tail->prev;
          address.erase(lru->key);
-         lru->prev->next=lru->next;
-         lru->next->prev=lru->prev;
-         node* newnode=new node(key, value);
+         removenode(lru); 
          //Adding after the head
-         newnode->next=head->next;
-         head->next->prev=newnode;
-         head->next=newnode;
-         newnode->prev=head;
-         address[key]=newnode;
-         
+         resnode=new node(key, value);
       }
+      //Adding the node after head
+      addnode(resnode);
+      //Updating the address of added node(for else-if conditions)
+      address[key]=resnode;
     }
 };
-
 /**
  * Your LRUCache object will be instantiated and called as such:
  * LRUCache* obj = new LRUCache(capacity);
