@@ -1,6 +1,4 @@
 //https://www.codingninjas.com/codestudio/problems/boundary-traversal_790725?utm_source=youtube&utm_medium=affiliate&utm_campaign=Striver_Tree_Videos
-
-
 /*
 TC-O(N)
 SC-O(N)
@@ -12,6 +10,7 @@ of traversal was upwards.)
 */
 vector<int>ans;
 vector<int>temp;
+bool isleaf(TreeNode<int>*cur){return (cur->left==NULL && cur->right==NULL);}
 TreeNode<int>* traverse_for_leaf(TreeNode<int>*cur)
 {
     if(cur==NULL)return NULL;
@@ -20,21 +19,25 @@ TreeNode<int>* traverse_for_leaf(TreeNode<int>*cur)
     if(l==NULL && r==NULL){ans.push_back(cur->data);}
     return cur;
 }
-int traverse_right(TreeNode<int>*cur)
+void traverse_right(TreeNode<int>*cur)
 {
-    if(cur!=NULL && (cur->left!=NULL || cur->right!=NULL))temp.push_back(cur->data);
-    else return 0;
-    if(cur->right)traverse_right(cur->right);
-    else traverse_right(cur->left); 
-    return 0;
+    while(cur && !isleaf(cur))
+    {
+      temp.push_back(cur->data);
+      if(cur->right)cur=cur->right;
+      else cur=cur->left;   
+    }
+    //Add the reversed temp vector into ans vector
+    for(int i=temp.size()-1;i>=0;i--) ans.push_back(temp[i]);
 }
-int traverse_left(TreeNode<int>*cur)
+void traverse_left(TreeNode<int>*cur)
 {
-    if(cur!=NULL && (cur->left!=NULL || cur->right!=NULL))ans.push_back(cur->data);
-    else return 0;
-    if(cur->left)traverse_left(cur->left);
-    else traverse_left(cur->right);
-    return 0;
+    while(cur && !isleaf(cur))
+    {
+      ans.push_back(cur->data);
+      if(cur->left)cur=cur->left;
+      else cur=cur->right;   
+    }
 }
 vector<int> traverseBoundary(TreeNode<int>* root)
 {
@@ -45,13 +48,5 @@ vector<int> traverseBoundary(TreeNode<int>* root)
     traverse_left(root->left);
     traverse_for_leaf(root);
     traverse_right(root->right);
-    int sz=temp.size();
-    for(int i=0,j=sz-1;i<j;i++,j--)
-    {
-        int ex=temp[i];
-        temp[i]=temp[j];
-        temp[j]=ex;
-    }
-    for(auto x: temp)ans.push_back(x);
     return ans;
 }
