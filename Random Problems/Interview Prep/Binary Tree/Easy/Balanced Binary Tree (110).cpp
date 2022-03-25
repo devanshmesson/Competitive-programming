@@ -1,6 +1,7 @@
 //https://leetcode.com/problems/balanced-binary-tree/
 
 /*
+
 TC- O(N)
 SC- O(N)
 If the height of left subtree and right subtree of the root has a difference > 1, then its not a balanced binary tree, because if a middle node is not
