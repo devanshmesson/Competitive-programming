@@ -8,6 +8,9 @@ if left or right subtree returns true, which means node got found, now we will n
 
 vector will be passed as reference, in orer to ensure that vector remians same in recursion call backs, basically we can control the vector if we pass
 through reference. If we pass by value then recursion will handle the vector.
+
+TC - O(N)
+SC - O(N)
 */
 bool getpath(TreeNode *node,vector<int>&ans, int B)
 { 
