@@ -21,8 +21,8 @@ public:
                 head2=head2->next;
             }
         }
-        while(head1!=NULL){tail->next=head1; tail=tail->next;  head1=head1->next;}
-        while(head2!=NULL){tail->next=head2; tail=tail->next;  head2=head2->next;}
+        if(head1!=NULL)tail->next=head1; 
+        if(head2!=NULL)tail->next=head2;
         return head->next;
     }
     ListNode* sortList(ListNode* head) 
