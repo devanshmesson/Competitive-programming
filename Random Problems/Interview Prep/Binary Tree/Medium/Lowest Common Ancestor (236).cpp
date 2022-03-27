@@ -42,3 +42,42 @@ public:
         return prev[big].first;
     }
 };
+
+/*
+TC - O(N)
+SC - O(N) due to recursion
+Run a DFS, if cur node is either p or q or null, so return cur node 
+to its parent node.Suppose this cur node was from left & cur node was p.
+then parent will go its right, if now, cur node is q. then cur node will be
+returned to its parent. 
+
+At one time during dfs, one of the nodes will get 1 node returned from
+left and 1 node returned from right.That means, the cur node is the LCA.
+so return this cur node to its parent node, eventually, it gets returned to
+the root, and root returns the LCA.
+
+If a node gets a node returned only from one of the sides, then the returned node
+will be returned to the cur node's parent.NULL will never be taken into consideration.
+
+If p is in subtree of q, then it will never happen that nodes will get 1 node returned from
+left and 1 node returned from right. One of the nodes will always return NULL. In that case,
+The returned node will be the LCA.
+*/
+class Solution 
+{
+public:
+    TreeNode* dfs(TreeNode *root, TreeNode* p, TreeNode* q)
+    {
+      if(root==p || root==q || root==NULL)return root;
+      TreeNode *left=dfs(root->left,p,q);
+      TreeNode *right=dfs(root->right,p,q);
+      if(left && right)return root;
+      return (left)?(left):(right);
+    }
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
+    {
+       if(p==root || q==root)return root;
+       if(p==q)return p;
+       return dfs(root,p,q);
+    }
+};
