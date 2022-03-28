@@ -3,6 +3,8 @@
 /*
 Very similar to Nodes at a distance k problem.
 run a bfs.
+TC- O(N)
+SC-O(N)
 */
 #include<bits/stdc++.h>
 void find_parent(BinaryTreeNode<int> *root, map<BinaryTreeNode<int>*,BinaryTreeNode<int>*>&parent, int start, BinaryTreeNode<int> **startnode)
