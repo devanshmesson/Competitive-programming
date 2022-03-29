@@ -13,6 +13,12 @@ So, preorder[0] is the root of whole tree. This root will be found out in the in
 2 parts, left and right.Then preorder[1] is assumed to be the root and left of it's root. So, find preorder[1] on the left side of the inorder.
 If not found, It will go to the right side.Increment the pointer of preorder sequence, when it found, otherwise dont.
 This process is done recursively, until whole preorder sequence is traversed.
+
+Let 'p' be  the number of nodes on the left side of the root in inorder sequence.
+In the preorder sequence, p elements after the root, will be on the left side of the root.
+
+TC - O(NLOGN)
+SC - O(N)
 */
 
 class Solution 
