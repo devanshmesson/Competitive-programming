@@ -1,21 +1,16 @@
 //https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 
 /*
-The two key observations are:
-
-1.Preorder traversal follows Root -> Left -> Right, therefore, given the preorder array preorder, we have easy access to the root which is preorder[0].
-2.Inorder traversal follows Left -> Root -> Right, therefore if we know the position of Root, we can recursively split the entire array into two subtrees.
- 
-In preorder, current element should be assumed as the root.This element is first checked if its on the left of its root.If not, it gets checked
-on the right side of root.Here inorder sequence helps us to fid the root and also check whether the element is on the left/right of the root.
-
-So, preorder[0] is the root of whole tree. This root will be found out in the inorder traversal and then inorder sequence gets divided into
-2 parts, left and right.Then preorder[1] is assumed to be the root and left of it's root. So, find preorder[1] on the left side of the inorder.
-If not found, It will go to the right side.Increment the pointer of preorder sequence, when it found, otherwise dont.
-This process is done recursively, until whole preorder sequence is traversed.
-
-Let 'p' be  the number of nodes on the left side of the root in inorder sequence.
-In the preorder sequence, p elements after the root, will be on the left side of the root.
+1.Root node of whole tree is the first element of tbe preorder sequence.
+2.Find the root in the inorder sequence, the elements on the left of the root index are the elements contained in the left subtree and 
+  the elements on the right of the root index are the elements contained in the right subtree of the root.
+3.Once the root node is found, we can recurse down on the right and left subtrees, i.e., right subarray and left subarray split at
+respective root index to repeat the same process until we find at most a single element in either sub-array.Attach root's left to
+the root of the left subtree and Attach root's right to the root of the right subtree.
+4.So, the left recursive call will contain, its inorder sequence and preorder sequence and right recursive call will contain
+  its inorder sequence and preorder sequence. So this became a new problem. So just start from point 1. This is how 
+  recursion is working.
+  
 
 TC - O(NLOGN)
 SC - O(N)
@@ -24,21 +19,26 @@ SC - O(N)
 class Solution 
 {
 public:
-    int ptr=0;
-    TreeNode* build_tree(vector<int>&preorder, vector<int>&inorder, int l, int r,map<int,int>&root_pos)
+    map<int,int>root_pos;
+    TreeNode* build_tree(vector<int>&preorder, vector<int>&inorder,int pre_start,int pre_end,int in_start, int in_end)
     {
-      if(l>r)return NULL;
-      int root_position=root_pos[preorder[ptr++]];
-      TreeNode *newroot=new TreeNode(inorder[root_position]);
-      newroot->left=build_tree(preorder,inorder,l,root_position-1,root_pos);
-      newroot->right=build_tree(preorder,inorder,root_position+1,r,root_pos);
+      if(pre_start>pre_end)return NULL;
+      //Finding the root
+      int root=preorder[pre_start];
+      //Finding the root position in order
+      int root_position=root_pos[root];
+      //finding number of nodes in the left subtree of root.
+      int leftnodes=root_position-in_start;
+      //Making node for the root
+      TreeNode *newroot=new TreeNode(preorder[pre_start]);
+      newroot->left=build_tree(preorder,inorder,pre_start+1,pre_start+leftnodes,in_start,root_position-1);
+      newroot->right=build_tree(preorder,inorder,pre_start+leftnodes+1,pre_end,root_position+1,in_end);
       return newroot;
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) 
     {
-       TreeNode *root=new TreeNode();
-       map<int,int>root_pos;
        for(int i=0;i<inorder.size();i++)root_pos[inorder[i]]=i;
-       return build_tree(preorder,inorder,0,inorder.size()-1,root_pos);
+       int pre_start=0,pre_end=inorder.size()-1,in_start=0,in_end=inorder.size()-1;
+       return build_tree(preorder,inorder,pre_start,pre_end,in_start,in_end);
     }
 };
