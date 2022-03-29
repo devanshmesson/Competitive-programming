@@ -1,7 +1,7 @@
 //https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
 
 /*
-1.Find the root node of whole tree is the last element of tbe postorder sequence.
+1.the root node of whole tree is the last element of tbe postorder sequence.
 2.Find the root in the inorder sequence, the elements on the left of the root index are the elements contained in the left subtree and 
   the elements on the right of the root index are the elements contained in the right subtree of the root.
 3.Once the root node is found, we can recurse down on the right and left subtrees, i.e., right subarray and left subarray split at
