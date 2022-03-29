@@ -7,8 +7,8 @@
 3.Once the root node is found, we can recurse down on the right and left subtrees, i.e., right subarray and left subarray split at
 respective root index to repeat the same process until we find at most a single element in either sub-array. Attach root's left to
 the root of the left subtree and Attach root's right to the root of the right subtree.
-4.So, the left recursive call will contain, its inorder sequence and preorder sequence and right recursive call will contain
-  its inorder sequence and preorder sequence. So this became a new problem. So just start from point 1. This is how 
+4.So, the left recursive call will contain, its inorder sequence and postorder sequence and right recursive call will contain
+  its inorder sequence and postorder sequence. So this became a new problem. So just start from point 1. This is how 
   recursion is working.
 */
 class Solution 
