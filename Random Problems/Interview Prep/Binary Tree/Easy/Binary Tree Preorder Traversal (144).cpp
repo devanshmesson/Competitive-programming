@@ -54,3 +54,52 @@ public:
         return ans;
     }
 };
+
+/*
+Morris Traversal (Iterative)
+Explanation written in notes.
+TC - O(N)
+SC-O(1)
+*/
+class Solution 
+{
+public:
+    
+    vector<int> preorderTraversal(TreeNode* root) 
+    {
+     vector<int>preorder;
+      while(root)
+      {
+          if(root->left==NULL)
+          {
+             preorder.push_back(root->val);
+             root=root->right;
+          }
+          else
+          {
+             TreeNode *traverse=root;
+             //Connecting the rightmost node in the left subtree of root to the root.
+             traverse=traverse->left;
+             //Second condition is necessary for the case when node is backtracked  from its rightmost node.
+             while(traverse->right && traverse->right!=root)
+             {
+               traverse=traverse->right;
+             }
+              
+             if(traverse->right==NULL)
+             {
+                preorder.push_back(root->val);
+                traverse->right=root;
+                root=root->left;
+             }
+             else
+             {
+                 //backtracking from rightmost node in the left subtree of root to the root, breaking the link too, because its no more needed.
+                 traverse->right=NULL;
+                 root=root->right;
+             }
+          }
+      }
+        return preorder;
+    }  
+};
