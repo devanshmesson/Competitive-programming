@@ -20,6 +20,31 @@ with this element is our answer.
 TC - O(N)
 SC - O(1)
 */
+class Solution{
+  public:
+    
+    Node * inOrderSuccessor(Node *root, Node *x)
+    {
+       Node *suc=NULL;
+       while(root)
+       {
+         if(root->left==NULL){if(root->data > x->data && !suc)suc=root; root=root->right;} 
+         else 
+         {
+           //Finding the rightmost node in the left subtree of the root and connecting it to root.
+           Node *traverse=root;
+           //going to left
+           traverse=traverse->left;
+           //going to extreme right
+           while(traverse->right && traverse->right!=root)traverse=traverse->right;
+           if(!traverse->right){traverse->right=root; root=root->left;}
+           else {if(root->data > x->data && !suc)suc=root; traverse->right=NULL; root=root->right;}
+          }  
+       }
+       return suc;
+    }
+    
+};
 
 
 
