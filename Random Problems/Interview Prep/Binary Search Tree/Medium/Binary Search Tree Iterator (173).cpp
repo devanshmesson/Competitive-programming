@@ -19,11 +19,14 @@ of the stack contains the first element of inorder traversal.If next() function 
 check if it has a right subtree or not. If yes, then stack inserts the right node of the top of the stack we just returned, and then inserts
 extreme left path nodes till the end. If you imagine, Inorder Traversal works the same way.
 
-TC -O()
+TC -O(1) [Amortized]
+Amortized means, taking a cost of operation over an extended period of time, Like the costly operations does not happen every time,
+Most of the times, low cost operations are happening, so in that case, Amortized analysis comes in.
+
+In the worst case, n next() calls will be there, We are pushing n nodes in the stack throughout the n next() calls.
+So, on an average, we are pushing 1 node per call. N/N =1.
+
 SC - O(Height of the tree)
-
-
-
 */
 class BSTIterator 
 {
