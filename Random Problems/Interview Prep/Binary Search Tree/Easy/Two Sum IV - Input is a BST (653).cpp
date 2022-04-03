@@ -71,8 +71,12 @@ For next(), we will save the nodes on the extreme left path of the root.If a nod
 nodes on the extreme left path of the root.
 
 For before(), we will just do opposite of next(), that is, RIGHT ROOT LEFT. we will save the nodes on the extreme right path of the root.
-If a node backtracks we will move to left and save the 
-nodes on the extreme left path of the root.
+If a node backtracks we will move to left and save the nodes on the extreme right path of the root.
+
+Stack will be used for both next and before. Stack will store at max number of nodes = heigh of tree.
+
+TC - O(N)
+SC - O(Height of tree)
 */
 class BST_iterator
 {
