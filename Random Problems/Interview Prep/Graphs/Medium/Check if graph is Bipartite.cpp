@@ -1,7 +1,8 @@
 //https://practice.geeksforgeeks.org/problems/bipartite-graph/1/
 
 /*
-Approach- BFS
+IDEA:
+
 A bipartite graph is a graph which can be colored using 2 colors such that no adjacent nodes have same color.
 Why adjacent nodes? because adjacent nodes have an edge between them, so bipartite graph splits nodes in two sets, where adjacent nodes are in different sets.
 
@@ -16,7 +17,10 @@ why?
 Visualize the cycle as a circular below
 cycle 1->2->3->4->5->6  (1 is connected to 6)
 coloured cycle 1 2 1 2 1 2 (all adjacent nodes have different color, so its bipartite)
+*/
 
+/*
+Approach- BFS
 
 Perform a BFS, on every component of the graph, If a node is coloured 1, color the adjacent nodes with 2 (if they are not coloured).
 If adjacent node is already coloured, then check if the current node and adjacent node have same color.If yes, then its not a bipartite
@@ -31,6 +35,7 @@ class Solution {
 public:
 	bool isBipartite(int V, vector<int>adj[])
 	{
+            //1 2 colouring will be done
 	    int color[V]={0};
 	    for(int i=0;i<V;i++)
 	    {
@@ -56,6 +61,54 @@ public:
 	     }
 	    }
 	    return true;
+	}
+
+};
+
+/*
+Approach - DFS
+
+Perform a DFS, on every component of the graph, If a node is coloured 1, color the adjacent nodes with 2 (if they are not coloured).
+If adjacent node is already coloured, then check if the current node and adjacent node have same color.If yes, then its not a bipartite
+graph.
+
+if we did not find any violation, that means, graph is bipartite.
+
+TC - O(N+E)
+SC - O(N+E)
+
+*/
+class Solution 
+{
+public:
+    bool dfs(int node,vector<int> *adj, int *color)
+    {
+       for(auto adjacent: adj[node])
+       {
+         if(color[adjacent]==0)
+         {
+             color[adjacent]=(color[node]==1)?2:1;
+             bool bipartite=dfs(adjacent,adj,color);
+             if(!bipartite)return false;
+         }
+         else if(color[adjacent]==color[node])return false;
+       }
+       return true;
+    }
+	bool isBipartite(int V, vector<int>adj[])
+	{
+	   //1 2 colouring will be done
+	   int color[V]={0};
+	   for(int i=0;i<V;i++)
+	   {
+	    if(color[i]==0)
+	    {
+	      color[i]=1;
+	      if(!dfs(i,adj,color))return false;
+	    }
+	   }
+	   return true;
+	   
 	}
 
 };
