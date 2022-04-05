@@ -38,8 +38,53 @@ signed main()
   {
     int n;
     cin>>n;
-    if(help(n)%2==help(n+1)%2)cout<<n+2<<endl;
-    else cout<<n+1<<endl;
+    int a[n+1];
+    int ans=0;
+    map<int,int>mp;
+    for(int i=0;i<n;i++)
+    {
+      cin>>a[i];
+    }
+    priority_queue<int>pq;
+    for(int i=0;i<n;i++)
+      {
+        mp[a[i]]++;
+      }
+
+    for(auto x: mp)
+      {
+        if(x.second%2==1)
+        {
+          ans++;
+          pq.push(x.second+1);
+        }
+        else pq.push(x.second);
+      }
+
+
+    while(pq.size()>1)
+    {
+      int big=pq.top();
+      pq.pop();
+      int small=pq.top();
+      pq.pop();
+      if((big-small)>0)pq.push(big-small);
+    }
+    if(pq.size()==1)
+    {
+      int left=pq.top();
+      if(left%4==0);
+      else 
+      {
+        int y=left/4;
+        y++;
+        int target=y*4;
+        ans+=(target-left);
+      }
+    }
+    
+    cout<<ans<<endl;
+
     
 
   }
