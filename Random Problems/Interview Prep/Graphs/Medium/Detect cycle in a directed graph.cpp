@@ -21,6 +21,8 @@ So, we will change the value of visit[node] to 2. Here value=2 signifies, that t
 visited in this current dfs function for a particular connected component.But this node is counted as visited overall in the graph. which 
 means, we will not start a dfs again from this node from the for loop.
 
+BFS cannot be used to implement this solution, because, in bfs, we cannot know, which node gets backtracked.
+
 TC - O(N+E)
 SC - O(N) + O(N)
 visit array + auxiliary recursion space.
