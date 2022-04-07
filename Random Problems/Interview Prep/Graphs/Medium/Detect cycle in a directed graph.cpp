@@ -60,3 +60,62 @@ class Solution
       return false;
     }
 };
+
+/*
+Performed BFS.Used the topological sort logic.
+Let total number of nodes in the graph be n.
+If there is a cycle, then number of nodes in the topo sort will not be equal to n.so return true.
+why?
+Consider this graph:
+
+1->2->3->4 and 4 is conneced to 2, which creates a cycle.
+
+BFS starts from 1, because its indegree is 0. Indegree of 2 gets reduced by 1. So now,
+indegree of 2 = 1. Now, there is no node, whose indegree is 0. So, BFS will not proceed further because queue will be empty.
+
+In a n-length cycle,
+For (i+1)th node pre-requisite is i.
+For 1st node pre-requisite is nth node.
+
+So, none of the nodes have a indegree of 0.So, topo sort cannot be found.
+      
+If there is not a cycle,then number of nodes in the topo sort will be equal to n.so return false.
+
+TC - O(N+E)
+TC - O(N)
+*/
+class Solution  
+{
+  public:
+    bool isCyclic(int V, vector<int> adj[]) 
+    {
+      queue<int>tp;
+	   int indegree[V]={0};
+	   for(int i=0;i<V;i++)
+	   {
+	     for(int j=0;j<adj[i].size();j++)indegree[adj[i][j]]++;
+	   }
+	   for(int i=0;i<V;i++)if(indegree[i]==0)tp.push(i);
+	   int nodes=0;
+       while(!tp.empty())
+       {
+          int node=tp.front();
+          nodes++;
+          tp.pop();
+          for(int i=0;i<adj[node].size();i++)
+          {
+              int adjacent=adj[node][i];
+              indegree[adjacent]--;
+              if(indegree[adjacent]==0)
+              {
+                  tp.push(adjacent);
+              }
+          }
+       }
+       if(nodes==V)return false;
+       else return true;
+       
+	}
+};
+
+
