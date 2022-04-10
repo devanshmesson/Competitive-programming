@@ -1,5 +1,29 @@
+//https://practice.geeksforgeeks.org/problems/minimum-spanning-tree/1
 /*
+Kruskal is a algorithm which finds the MST for a given graph.
+Kruskal Algorithm -
+1.Sort all edges according to weights in increasing order.
+2.Traverse the sorted edges and starting making MST by adding the edges.
+3.Before adding the edges, make sure to check if this edge will make a cycle or not.
+4.If it makes a cycle then skip it, if not, add it and add the cost to a variable.
+5.Do this until all the edges are traversed.
 
+When N-1 edges will be added, rest of the edges will make a cycle, we will not add them.
+
+Disjoint set union data structure is used to find whether an edge will make cycle or not.
+If two nodes are already in the same set, then that means the edge will creat a cycle, because
+If they are already in the set, that means a unique path exists already between
+the two nodes that are associated with that particular edge and if we directly add that edge,
+then two different paths will be there between those two nodes, which will make it a cycle.
+Since MST is a tree, we dont want cycles. thats why we are checking this.
+
+
+
+TC - O(M*LogM) + O(M * O(4*ALPHA)) = O(M*LogM) [Sorting the edges]
+O(4*ALPHA) is a constant.
+M means number of edges.
+
+SC - O(M)+O(N)
 */
 struct edge
 {
