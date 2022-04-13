@@ -1,6 +1,17 @@
 //https://practice.geeksforgeeks.org/problems/articulation-point2616/1/#
 
 /*
+Idea is same as bridges.
+A node(v) is an articulation point iff, in atleast one subtree of v, there is no node which has a back edge connecting to ancestor of v.
+A node(v) is not an articulation point iff, in all subtrees of v, there is a node which has a back edge connecting to ancestor of v due to which
+the graph stays connected.
+
+One corner case - The lowest reachable ancestor will always be <= in time of root of graph, so If the node is a root of the graph, 
+and it has only subtree, then root is not an articulation point.If root has more than one subtrees,then root is articulation point.
+
+TC- O(N+E)
+SC - O(N)
+
 
 */
 class Solution 
