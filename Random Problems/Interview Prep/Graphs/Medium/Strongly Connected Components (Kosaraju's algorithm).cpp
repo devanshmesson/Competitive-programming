@@ -1,4 +1,10 @@
 //https://practice.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1/
+
+/*
+Explanation in notes
+TC - O(N+E)
+SC - O(N+E)
+*/
 class Solution
 {
 	public:
