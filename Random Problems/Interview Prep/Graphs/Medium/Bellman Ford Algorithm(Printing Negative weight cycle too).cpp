@@ -34,10 +34,14 @@ class Solution
     vector <int> bellman_ford(int V, vector<vector<int>> adj, int S) 
     {
         vector<int>distance(V);
+        int pre[V];
         for(int i=0;i<V;i++)distance[i]=1e8;
         distance[S]=0;
-        for(int i=0;i<V-1;i++)
+        //Running V times, so that if theres a cycle , we can print it
+        int lastnode;
+        for(int i=0;i<V;i++)
         {
+          lastnode=-1;
          for(int j=0;j<adj.size();j++)
          {
             int node1=adj[j][0];
@@ -46,9 +50,40 @@ class Solution
             if(distance[node1]+wt<distance[node2])
             {
                 distance[node2]=distance[node1]+wt;
+                lastnode=node2;
+                pre[node2]=node1;
             }
          }
         }
+        /*
+        if(lastnode==-1)cout<<"No cycle";
+        else 
+        {
+          //Traverse the predessesors from last node n times.After traversing
+          //the last node traversed will belong to a cycle, because, during the
+          //traversal, as soon as it enters the cycle, the nodes will be repeating inside
+          //because, relaxation will happen among the nodes of the cycle.
+          for(int i=0;i<n;i++)
+          {
+             lastnode=pre[lastnode];
+          }
+          //Now, lastnode is one of the nodes in a cycle, we will again traverse the predessors and save them , until we get back to same node from
+          //which we started, which is "lastnode"
+          vector<int>negcycle;
+          int cur=lastnode;
+          while(1)
+          {
+            negcycle.push_back(cur);
+            if(pre[cur]==lastnode)break;
+          }
+          //we have got the reversed path, now reverse to get the 
+          //sequential path of the negative weight cycle
+          reverse(negcycle.begin(),negcycle.end());
+          for(auto x: negcycle)cout<<x<<" ";
+          
+        }
+        */
+        
         return distance;
     }
 };
