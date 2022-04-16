@@ -1,4 +1,27 @@
 //https://practice.geeksforgeeks.org/problems/alien-dictionary/1/?page=1&company[]=Microsoft&category[]=Graph&sortBy=submissions#
+
+/*
+Performed Topological Sort here.
+We are given some strings, which we have to consider as sorted. They are not actually sorted.
+From the order in which strings are placed, we have to print the alphabetical order
+of the characters in terms of how it is sorted.
+
+
+
+We will first compare adjacent strings , and will compare the ith character of both strings.
+If string1[i]!=string2[i], that means, string1[i] should come before string2[i].
+This reminds us of Topo sort. So, we can create a directed graph of nodes being characters.
+So, push string2[i] in the adjacency list of string1[i].Now, as soon as we found this unequal condition we will break the comparison loop because, this is a like a lexicographical 
+comparison. Now we will move to next two adjacent strings and do the same.
+
+Now we have the directed graph, perform Toposort, we will get the sequence of which comes before and which comes after.
+
+N edges and K nodes are there at max.
+TC - O(N+K)
+SC - O(K)
+
+
+*/
 class Solution
 {
     public:
