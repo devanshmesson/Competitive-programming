@@ -1,4 +1,19 @@
 //https://leetcode.com/problems/number-of-islands/
+/*
+Performed BFS.
+This problem is basically count connected components.
+So, we have to find connected lands(represented by 1) in the matrix.
+We can go left,right,up,down to travel from one land to adjacent land.
+So, just run bfs from each land and visit all the adjacent lands possible, and increment island counter once 
+before a new BFS call starts.
+
+Intuition : The area other than connected lands is water so, automatically connected lands are surrounded by water.
+
+TC - O(M*N + M*N) In total, BFS will run M*N times
+SC - O(M*N)
+
+
+*/
 class Solution 
 {
 public:
