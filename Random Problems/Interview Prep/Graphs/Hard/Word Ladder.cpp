@@ -12,7 +12,7 @@ just keep track of distance variable in the queue and if we are going to one nod
 distance by 1.
 
 TC - O(N*M)
-S  - O(N)
+S  - O(N*M)
 */
 class Solution 
 {
