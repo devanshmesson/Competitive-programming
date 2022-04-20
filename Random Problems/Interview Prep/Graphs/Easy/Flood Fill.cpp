@@ -1,4 +1,10 @@
 //https://leetcode.com/problems/flood-fill/submissions/
+/*
+Performed BFS.
+If the adjacent cell has same color as the starting cell, then paint it.
+TC - O(N*M)
+SC - O(N*M)
+*/
 class Solution {
 public:
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) 
