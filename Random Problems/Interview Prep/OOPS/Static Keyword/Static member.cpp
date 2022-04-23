@@ -1,7 +1,7 @@
 class A
 {
  public:
- static int object_count;
+ static int object_count;  //Declaration
  A(){object_count++;}
 };
 
