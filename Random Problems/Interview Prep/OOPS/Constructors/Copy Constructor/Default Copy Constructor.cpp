@@ -47,18 +47,34 @@ class employee
 
 signed main()
 {
-  char n[]="devansh";
-  employee devansh("Amazon",21,n);
-  employee *parth=new employee("Google",22,n);
+  char name[]="devansh";
+  employee devansh("Amazon",21,name);
   
-  //Copying the object, and default copy constructor will be invoked.
+  //copying the object
   employee divyam=devansh;
+  cout<<"New Object details:"<<endl;
   divyam.print();
   cout<<endl;
+  cout<<"Old Object details:"<<endl;
   devansh.print();
 
   /*
    Another syntax to copy the object:
     employee new_object(old_object);
   */
+
 }
+
+/*
+Output:
+New Object details:
+Name:devansh
+Age:21
+Company:Amazon
+
+Old Object details:
+Name:devansh
+Age:21
+Company:Amazon
+
+*/
