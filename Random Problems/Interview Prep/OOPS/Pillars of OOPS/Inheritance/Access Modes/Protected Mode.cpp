@@ -83,7 +83,7 @@ signed main()
   */
 
   // cout<<m.income<<endl; // this will produce error
-  cout<<m.getAge()<<endl; //getAge() will produce error
+  //cout<<m.getIncome()<<endl; //getIncome() will produce error
 
 
 }
