@@ -1,3 +1,4 @@
+//Used plus operator to add 2 or more complex numbers.
 class Complex
 {
   public:
