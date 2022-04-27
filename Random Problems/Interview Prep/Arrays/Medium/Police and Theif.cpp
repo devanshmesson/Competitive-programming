@@ -86,3 +86,50 @@ class Solution{
       return caught;
     }
 };
+
+/*
+Same approach, Same TC BUT IN O(1) Space.
+*/
+
+class Solution
+{
+    public:
+    int next_police(int &p, char *arr, int n)
+    {
+      p++;
+      int i;
+      for(i=p;i<n;i++)
+      {
+       if(arr[i]=='P')break;   
+      }
+      p=i;
+    }
+    int next_theif(int &t, char *arr, int n)
+    {
+      t++;
+      int i;
+      for(i=t;i<n;i++)
+      {
+       if(arr[i]=='T')break;   
+      }
+      t=i;
+    }
+    int catchThieves(char arr[], int n, int k) 
+    {
+      int p=INT_MAX,t=INT_MAX, caught=0;
+      for(int i=0;i<n;i++)if(arr[i]=='P'){p=i; break;}
+      for(int i=0;i<n;i++)if(arr[i]=='T'){t=i; break;}
+      while(p<n && t<n)
+      {
+        if(t>=(p-k) && t<=p || t>=p && t<=(p+k))
+        {
+         next_police(p,arr,n);
+         next_theif(t,arr,n);
+         caught++;
+        }
+        if(t<(p-k))next_theif(t,arr,n);
+        else if(t>(p+k))next_police(p,arr,n);
+      }
+      return caught;
+    }
+};
